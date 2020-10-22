@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import { ImageBackground,StyleSheet, Text, View, Animated, Image, Dimensions,TextInput, Button} from 'react-native';
 import LoginBox from "./loginBox";
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 
 
@@ -22,19 +23,15 @@ const MyloginPage = (props) =>{
                             placeholder={'Password'} 
                             style={styles.TextBox}
                         />
-                        <View style={styles.logbutton}>
-                        <Button
-                            title={'login'}
-                        />
-                        </View>
-                        <Text style={{color:'grey', margin:5,}}>Don't have an account?</Text>
-                        <View style={styles.regisbutton}>
-                        <Button
-                            title={'register'}
-                            color="grey"
+                        <TouchableOpacity style={styles.Loginbutton}
+                            onPress={() => onpressLogin('login')}
+                        ><Text style={styles.Textinbutton}>Login</Text></TouchableOpacity>
+
+                        <Text style={{color:'grey', marginTop:5,}}>Don't have an account?</Text>
+
+                        <TouchableOpacity style={styles.regisbutton}
                             onPress={() => onpressLogin('register')}
-                        />
-                        </View>
+                        ><Text style={styles.Textinbutton}>Register</Text></TouchableOpacity>
                     </View>
             );
         }
@@ -58,21 +55,13 @@ const MyloginPage = (props) =>{
                             placeholder={'Email'} 
                             style={styles.TextBox}
                         />
-                        <View style={styles.regisbutton}>
-                        <Button
-                            title={'register'}
-                            
-                        />
-                        
-                        </View>
-
-                        <View style={styles.cancelbutton}>
-                        <Button
-                            title={'cancel'}
-                            color="grey"
+                        <TouchableOpacity style={styles.regisbutton}
                             onPress={() => onpressLogin('login')}
-                        />
-                        </View>
+                        ><Text style={styles.Textinbutton}>Register</Text></TouchableOpacity>
+
+                        <TouchableOpacity style={styles.cancelbutton}
+                            onPress={() => onpressLogin('login')}
+                        ><Text style={styles.Textinbutton}>Cancel</Text></TouchableOpacity>
                     </View>
             );
         }
@@ -133,21 +122,35 @@ const styles = StyleSheet.create({
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderRadius:7,
     },
-    logbutton:{
+    Loginbutton:{
         marginTop: 10,
-        borderRadius: 10,
-        color: "white",
+        borderRadius: 7,
         width: 200,
+        backgroundColor: "rgb(0,142,255)",
+        height: 40,
+        justifyContent: 'center',
+        alignItems:'center'
     },
     regisbutton:{
-        borderRadius: 10,
-        color: "white",
+        marginTop: 10,
+        borderRadius: 7,
         width: 200,
+        backgroundColor: "rgb(0,142,255)",
+        height: 40,
+        justifyContent: 'center',
+        alignItems:'center'
     },
     cancelbutton:{
-        margin: 10,
-        borderRadius: 10,
-        color: "white",
+        marginTop: 10,
+        borderRadius: 7,
         width: 200,
+        backgroundColor: "grey",
+        height: 40,
+        justifyContent: 'center',
+        alignItems:'center'
+    },
+    Textinbutton:{
+        color: 'white',
     }
+
   });
