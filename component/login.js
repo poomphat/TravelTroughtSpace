@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     loginBox:{
         alignItems: 'center',
         width:Dimensions.get('window').width - 70,
-        height:Dimensions.get('window').height - 435,
+        height:Dimensions.get('window').height - 425,
         backgroundColor:'white',
         borderRadius:10,
         padding:20,
