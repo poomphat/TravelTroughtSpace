@@ -1,12 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
-import MyloginPage from './component/login';
+//import MyloginPage from './component/login';
 //import Profile from './component/Profile';
-import MainScreen from './screen/mainScreen';
+//import MainScreen from './screen/mainScreen';
+import PlanetNavigator from './navigation/SpaceNavigator'
 export default function App() {
   return (
-      <MainScreen></MainScreen>
+      <PlanetNavigator></PlanetNavigator>
   );
 }
 const styles = StyleSheet.create({
