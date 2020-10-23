@@ -13,10 +13,14 @@ const UserInfo = (props) =>{
     const [exp, setExp] = useState(0);
     return(
         <View style={styles.infoBox}>
+            <TouchableOpacity
+                style={styles.Gopro}
+                onPress={props.Gotoprofile}>
             <Image
                 style={styles.profilePic}
                 source={require("../assets/mheeIconTest.png")} //รอแก้จาก UserDB
             />
+            </TouchableOpacity>
             <View style={styles.ProgressBar}>
                 <ProgressBar
                     progress={exp} 
@@ -48,6 +52,9 @@ const UserInfo = (props) =>{
 export default UserInfo;
 
 const styles = StyleSheet.create({
+    Gopro:{
+        height:45,
+    },
     infoBox:{
         height: 100,
         width: "100%",

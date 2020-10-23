@@ -5,7 +5,8 @@ import { StyleSheet, Text, View, Image, Platform, Button, Dimensions, ImageBackg
 const MainScreen = (props) =>{
     return(
         <ImageBackground source={require('../assets/bg.png')} style={styles.container} resizeMode="repeat">
-            <UserInfo/>
+            <UserInfo
+                Gotoprofile={() => {props.navigation.navigate("profile")}}/>
             <CurrentPlanet
                 planetclicked={() => {props.navigation.navigate("planetInfo")}}
             />
