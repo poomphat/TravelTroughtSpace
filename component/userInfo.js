@@ -10,7 +10,7 @@ import Constants from 'expo-constants';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const UserInfo = (props) =>{
-    const [exp, setExp] = useState(0);
+    const [exp, setExp] = useState(0.7);
     return(
         <View style={styles.infoBox}>
             <TouchableOpacity

@@ -8,7 +8,7 @@ import LoadingScreen from './component/loadingScreen';
 import PlanetNavigator from './navigation/SpaceNavigator'
 export default function App() {
   return (
-      <PlanetNavigator></PlanetNavigator>
+      <MyloginPage></MyloginPage>
   );
 }
 const styles = StyleSheet.create({

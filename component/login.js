@@ -40,12 +40,38 @@ const MyloginPage = (props) => {
     const [loginState, setLoginState] = useState('login');
     const [Username, setUsername] = useState('');
     const [Password, setPassword] = useState('');
+    const [name, setname] = useState('');
+    const [surname, setsurname] = useState('');
+    const [Id, setId] = useState('');
     const onpressLogin = (text) => {
         setLoginState(text)
+        console.log(firebase.auth().currentUser);
+        
     }
-    const signUpUser = (email, password) => {
+    const logout = () => {
+        firebase.auth().signOut()
+        console.log(firebase.auth().currentUser);
+        
+    }
+    const signUpUser = (email, password,fname,lname) => {
         try {
-            firebase.auth().createUserWithEmailAndPassword(email, password)
+            firebase.auth().createUserWithEmailAndPassword(email, password).then(data => {  
+                console.log("User ID :- ", data.user.uid);
+                setId(data.user.uid);
+             })
+            firebase.database().ref('UsersList/').push({
+                    userId,
+                    email,
+                    fname,
+                    lname,
+                }).then((data)=>{
+                    //success callback
+                    console.log('data ' , data)
+                }).catch((error)=>{
+                    //error callback
+                    console.log('error ' , error)
+                })
+            
         }
         catch (error) {
             console.log(error.toString())
@@ -87,12 +113,15 @@ const MyloginPage = (props) => {
                     <TouchableOpacity style={styles.Loginbutton}
                         onPress={() => loginUser(Username, Password)}
                     ><Text style={styles.Textinbutton}>Login</Text></TouchableOpacity>
+                    <TouchableOpacity style={styles.Loginbutton}
+                        onPress={() => logout()}
+                    ><Text style={styles.Textinbutton}>Logout Test</Text></TouchableOpacity>
 
                     <Text style={{ color: 'grey', marginTop: 5, }}>Don't have an account?</Text>
 
                     <TouchableOpacity style={styles.regisbutton}
                         onPress={() => (onpressLogin('register'))}
-                    ><Text style={styles.Textinbutton}>Register</Text></TouchableOpacity>
+                    ><Text style={styles.Textinbutton}>Register Check current User in console.log</Text></TouchableOpacity>
                 </View>
             );
         }
@@ -116,11 +145,23 @@ const MyloginPage = (props) => {
                         onChangeText={(pass) => setPassword(pass)}
                     />
                     <TextInput
+                        placeholder={'name'}
+                        style={styles.TextBox}
+                        autoCapitalize="none"
+                        onChangeText={(name) => setname(name)}
+                    />
+                    <TextInput
+                        placeholder={'Surname'}
+                        style={styles.TextBox}
+                        autoCapitalize="none"
+                        onChangeText={(sur) => setsurname(sur)}
+                    />
+                    <TextInput
                         placeholder={'Confirm Password'}
                         style={styles.TextBox}
                     />
                     <TouchableOpacity style={styles.regisbutton}
-                        onPress={() => signUpUser(Username, Password)}
+                        onPress={() => signUpUser(Username, Password,name,surname)}
                     ><Text style={styles.Textinbutton}>Register</Text></TouchableOpacity>
 
                     <TouchableOpacity style={styles.cancelbutton}

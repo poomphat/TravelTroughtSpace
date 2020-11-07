@@ -24,7 +24,6 @@ const Profile = (props) => {
         </View>
         <View style={styles.detail}>
         <View style={styles.box}>
-
           <View style={styles.DetailBox}>
             <Text style={{ fontSize: 15 }}>Name: Towa Tenshi</Text>
             <Text style={{ fontSize: 15 }}>Age: xxx</Text>
@@ -103,18 +102,19 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderRadius: 90,
     margin: 10,
-
   },
   detail:{
-    borderRadius: 15,
-    backgroundColor: '#1a1a2e',
+    shadowColor: '#000',
+    shadowRadius: 10,
+    shadowOpacity:1,
+    backgroundColor: '#eeeeee',
     marginTop: 20,
     height: '70%',
     alignItems: 'center',
   },
   DetailBox: {
     height: windowHeight * 0.1,
-    backgroundColor: '#30475e',
+    backgroundColor: '#dddddd',
     width: windowWidth * 0.9,
     marginTop:30,
     alignSelf: 'center',
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     width: windowWidth * 0.9,
     marginTop:30,
-    backgroundColor: '#30475e',
+    backgroundColor: '#dddddd',
     paddingBottom: 10,
     
   },
