@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { Pages } from 'react-native-pages';
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -7,6 +7,10 @@ import { AntDesign } from '@expo/vector-icons';
 
 const PlanetInfo = (props) => {
   // มันมี lib ที่ช่วยเรื่อง stiky อยู่จะเอามะ
+  const [loaded, setLoaded] = useState(false);
+  useEffect(() => {
+    setLoaded(true)
+  })
   return (
     <View style={{ flex: 1, backgroundColor: 'rgb(0,122,255)' }}>
       <ScrollView>

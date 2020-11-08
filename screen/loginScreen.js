@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { ImageBackground, StyleSheet, Text, View, Animated, Image, Dimensions, TextInput, Button,Easing } from 'react-native';
-import LoginBox from "./loginBox";
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as firebase from 'firebase';
 
@@ -31,7 +30,7 @@ const MyloginPage = (props) => {
             Animated.timing(
             movebg, {
             toValue: 1,
-            duration: 20000,
+            duration: 50000,
             useNativeDriver: true,
             easing : Easing.linear,
         })).start( ()=>{movebg.setValue(0)});
@@ -83,8 +82,10 @@ const MyloginPage = (props) => {
 
             firebase.auth().signInWithEmailAndPassword(email, password).then(function (user) {
                 console.log('finishlogin')
+                props.navigation.navigate('mainScreen')
 
             })
+            
         }
         catch (error) {
             console.log(error.toString())
@@ -121,7 +122,7 @@ const MyloginPage = (props) => {
 
                     <TouchableOpacity style={styles.regisbutton}
                         onPress={() => (onpressLogin('register'))}
-                    ><Text style={styles.Textinbutton}>Register Check current User in console.log</Text></TouchableOpacity>
+                    ><Text style={styles.Textinbutton}>Register</Text></TouchableOpacity>
                 </View>
             );
         }
@@ -222,7 +223,7 @@ const styles = StyleSheet.create({
     TextBox: {
         padding: 10,
         margin: 10,
-        width: 200,
+        width: Dimensions.get('window').width - 300,
         height: 50,
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderRadius: 7,
@@ -230,7 +231,7 @@ const styles = StyleSheet.create({
     Loginbutton: {
         marginTop: 10,
         borderRadius: 7,
-        width: 200,
+        width: Dimensions.get('window').width - 300,
         backgroundColor: "rgb(0,142,255)",
         height: 40,
         justifyContent: 'center',
@@ -239,7 +240,7 @@ const styles = StyleSheet.create({
     regisbutton: {
         marginTop: 10,
         borderRadius: 7,
-        width: 200,
+        width: Dimensions.get('window').width - 300,
         backgroundColor: "rgb(0,142,255)",
         height: 40,
         justifyContent: 'center',
