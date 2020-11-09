@@ -5,10 +5,13 @@ import { StyleSheet, Text, View, Image } from 'react-native';
 import LoadingScreen from './component/loadingScreen';
 //import Profile from './component/Profile';
 //import MainScreen from './screen/mainScreen';
-import PlanetNavigator from './navigation/SpaceNavigator'
+import PlanetNavigator from './navigation/SpaceNavigator';
+import Solarsystem from './screen/solarsystemScreen';
+
+
 export default function App() {
   return (
-      <PlanetNavigator/>
+      <Solarsystem/>
   );
 }
 const styles = StyleSheet.create({
