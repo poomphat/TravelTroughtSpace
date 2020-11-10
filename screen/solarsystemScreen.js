@@ -5,14 +5,14 @@ import { StyleSheet, Text, View, Image, Platform, Button, Dimensions, ImageBackg
 import Carousel from 'react-native-snap-carousel';
 import { FontDisplay } from 'expo-font';
 
-const data = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+const data = [1, 2, 3, 4, 5, 6, 7, 8, "aaa"]
 
-const MainScreen = (props) => {
+const solarSystemScreen = (props) => {
     const [current, setcurrent] = useState(0)
     const movebg = useRef(new Animated.Value(0)).current;
     const move = movebg.interpolate({
-        inputRange: [0,0.125,0.250,0.375,0.500,0.625,0.750,0.875,1],
-        outputRange: [0,200,400,600,800,1000,1200,1400,1600]
+        inputRange: [0,1],
+        outputRange: [0,Dimensions.get('window').width]
     });
 
     const carouselRef = useRef('')
@@ -31,6 +31,7 @@ const MainScreen = (props) => {
                 />
             </View>);
     };
+    /*
     const displayplanet = (index) => {
         console.log(index,indexmain)
         if (index < indexmain) {
@@ -39,7 +40,7 @@ const MainScreen = (props) => {
                 duration: 500,
                 useNativeDriver: true,
                 easing: Easing.out(Easing.ease),
-            }).start()
+            }).start(() => {movebg.setValue(0)})
             console.log(move,"left")
         } else {
             Animated.timing(movebg, {
@@ -47,22 +48,27 @@ const MainScreen = (props) => {
                 duration: 500,
                 useNativeDriver: true,
                 easing: Easing.out(Easing.ease),
-            }).start()
+            }).start(movebg.setValue(0))
             console.log(move,'right')
         }
         setindexmain(index);
         console.log(current);
 
     };
+    */
     return (
         <View style={{flex: 1,
             alignItems: 'center',
             justifyContent: "center",}}>
+        
         <Animated.Image source={require('../assets/bg.png')} style={{ 
             position: 'absolute',
-            width:Dimensions.get('window').width*2,
-            height:Dimensions.get('window').height*2,
-            transform: [{translateX: move }]}} resizeMode="cover"></Animated.Image>
+            width:Dimensions.get('window').width,
+            height:Dimensions.get('window').height,
+            transform: [{translateX: 0 }]}} resizeMode="cover">
+        
+        </Animated.Image>
+        
             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }}>
                 <Carousel
                     ref={carouselRef}
@@ -71,7 +77,7 @@ const MainScreen = (props) => {
                     renderItem={renderItem}
                     sliderWidth={Dimensions.get('window').width}
                     itemWidth={Dimensions.get('window').width}
-                    onSnapToItem={(index) => displayplanet(index)}
+                    onSnapToItem={(index) => setindexmain(index)}
                 />
             </View>
             <View style={styles.boxdetail}>
@@ -106,4 +112,4 @@ const styles = StyleSheet.create({
 
     }
 })
-export default MainScreen;
+export default solarSystemScreen;

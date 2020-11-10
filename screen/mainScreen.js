@@ -9,6 +9,7 @@ const MainScreen = (props) =>{
                 Gotoprofile={() => {props.navigation.navigate("profile")}}/>
             <CurrentPlanet
                 planetclicked={() => {props.navigation.navigate("planetInfo")}}
+                onSolarClicked={() => {props.navigation.navigate("solarSystem")}}
             />
         </ImageBackground>
     );

@@ -6,12 +6,11 @@ import LoadingScreen from './component/loadingScreen';
 //import Profile from './component/Profile';
 //import MainScreen from './screen/mainScreen';
 import PlanetNavigator from './navigation/SpaceNavigator';
-import Solarsystem from './screen/solarsystemScreen';
 
 
 export default function App() {
   return (
-      <Solarsystem/>
+      <PlanetNavigator/>
   );
 }
 const styles = StyleSheet.create({

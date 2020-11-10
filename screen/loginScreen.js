@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { ImageBackground, StyleSheet, Text, View, Animated, Image, Dimensions, TextInput, Button,Easing } from 'react-native';
+import { Platform, StyleSheet, Text, View, Animated, Image, Dimensions, TextInput, Button,Easing } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as firebase from 'firebase';
 
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
     loginBox: {
         alignItems: 'center',
         width: Dimensions.get('window').width - 70,
-        height: Dimensions.get('window').height - 425,
+        height: Platform.isPad?Dimensions.get('window').height*0.4:Dimensions.get('window').height*0.5,
         backgroundColor: 'white',
         borderRadius: 10,
         padding: 20,
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
     },
     regisBox: {
         width: Dimensions.get('window').width - 70,
-        height: Dimensions.get('window').height - 320,
+        height: Dimensions.get('window').height - Dimensions.get('window').height*0.5,
     },
     Label: {
         position: "relative",
@@ -223,7 +223,7 @@ const styles = StyleSheet.create({
     TextBox: {
         padding: 10,
         margin: 10,
-        width: Dimensions.get('window').width - 300,
+        width: Dimensions.get('window').width - Dimensions.get('window').width*0.3,
         height: 50,
         borderBottomWidth: StyleSheet.hairlineWidth,
         borderRadius: 7,
@@ -231,7 +231,7 @@ const styles = StyleSheet.create({
     Loginbutton: {
         marginTop: 10,
         borderRadius: 7,
-        width: Dimensions.get('window').width - 300,
+        width: Dimensions.get('window').width - Dimensions.get('window').width*0.3,
         backgroundColor: "rgb(0,142,255)",
         height: 40,
         justifyContent: 'center',
@@ -240,7 +240,7 @@ const styles = StyleSheet.create({
     regisbutton: {
         marginTop: 10,
         borderRadius: 7,
-        width: Dimensions.get('window').width - 300,
+        width: Dimensions.get('window').width - Dimensions.get('window').width*0.3,
         backgroundColor: "rgb(0,142,255)",
         height: 40,
         justifyContent: 'center',
