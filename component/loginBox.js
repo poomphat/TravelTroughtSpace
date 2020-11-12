@@ -33,9 +33,8 @@ export default LoginBox;
 const styles = StyleSheet.create({
     loginBox:{
         alignItems: 'center',
-        //justifyContent: 'center',
+        justifyContent: 'center',
         width:Dimensions.get('window').width - 70,
-        height:Dimensions.get('window').height - 450,
         backgroundColor:'white',
         borderRadius:10,
         padding:20,

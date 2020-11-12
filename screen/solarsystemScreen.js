@@ -5,7 +5,8 @@ import { StyleSheet, Text, View, Image, Platform, Button, Dimensions, ImageBackg
 import Carousel from 'react-native-snap-carousel';
 import { FontDisplay } from 'expo-font';
 
-const data = [1, 2, 3, 4, 5, 6, 7, 8, "aaa"]
+const data = [1, 2, 3, 4, 5, 6, 7, 8]
+const dataEarth = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune']
 
 const solarSystemScreen = (props) => {
     const [current, setcurrent] = useState(0)
@@ -81,7 +82,7 @@ const solarSystemScreen = (props) => {
                 />
             </View>
             <View style={styles.boxdetail}>
-                <Text style={{ fontSize: 36 }}>{indexmain}</Text>
+                <Text style={{ fontSize: 36 }}>{dataEarth[indexmain]}</Text>
             </View>
         
         </View>
@@ -103,7 +104,7 @@ const styles = StyleSheet.create({
     },
     boxdetail: {
         width: Dimensions.get('window').width * 0.8,
-        height: 170,
+        height: 250,
         backgroundColor: 'white',
         borderRadius: 20,
         marginBottom: 20,

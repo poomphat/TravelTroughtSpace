@@ -5,7 +5,7 @@ import MainScreen from "../screen/mainScreen";
 import PlanetInfo from "../screen/planetInfoScreen";
 import Profile from "../component/Profile"
 import MyloginPage from "../screen/loginScreen";
-import solarSystemScreen from "../screen/solarSystemScreen"
+import solarSystemScreen from "../screen/solarsystemScreen";
 const planetNavigator = createStackNavigator(
     {
         loginScreen:MyloginPage,
