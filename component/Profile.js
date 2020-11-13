@@ -1,20 +1,26 @@
-import React, { Component } from 'react';
+import React, { Component,useRef } from 'react';
 import { Pages } from 'react-native-pages';
 import { StyleSheet, Text, View, Image, Dimensions, ImageBackground, TouchableOpacity } from 'react-native';
 //https://docs.expo.io/versions/latest/sdk/linear-gradient/
-import { LinearGradient } from 'expo-linear-gradient';
+import Carousel from 'react-native-snap-carousel';
+
+const data = [1, 2, 3]
 
 const Profile = (props) => {
-
+  const carouselRef = useRef('')
+  const renderItem = ({ item, index }) => {
+    return (
+        <View style={styles.box}>
+            <Image
+              style={styles.spaceShip}
+              source={require("../assets/spaceship/ship1.png")} //รอทำ data ยาน
+            />
+        </View>);
+};
   return (
     <ImageBackground source={require('../assets/bg.png')} style={styles.container} resizeMode="repeat">
       <View>
-        <View style={styles.pictitleout}>
-          <Image
-            style={styles.pictitle}
-            source={require("../assets/pro.png")}
-          />
-        </View>
+
         <View style={styles.Bgprofile}>
           <Image
             style={styles.profilePic}
@@ -25,9 +31,9 @@ const Profile = (props) => {
         <View style={styles.detail}>
         <View style={styles.box}>
           <View style={styles.DetailBox}>
-            <Text style={{ fontSize: 15 }}>Name: Towa Tenshi</Text>
-            <Text style={{ fontSize: 15 }}>Age: xxx</Text>
-            <Text style={{ fontSize: 15 }}>Kawaii</Text>
+            <Text style={{ fontSize: 15 ,color: 'white',fontWeight: 'bold' }}>Name: Towa Tenshi</Text>
+            <Text style={{ fontSize: 15,color: 'white',fontWeight: 'bold' }}>Age: xxx</Text>
+            <Text style={{ fontSize: 15,color: 'white',fontWeight: 'bold' }}>Kawaii</Text>
           </View>
         </View>
 
@@ -35,18 +41,26 @@ const Profile = (props) => {
 
           <View style={styles.topship}>
             <Text style={styles.titleship}>Your Ship</Text>
+            <TouchableOpacity style={styles.Select}>
+              <Text style={{ fontSize: 14,fontWeight: 'bold',color:'rgb(0,142,255)' }}>Change</Text>
+            </TouchableOpacity>
           </View>
+          <View style={{flexDirection: 'row'}}>
           <View style={styles.bottomship}>
-            <Image
-              style={styles.spaceShip}
-              source={require("../assets/spaceship/ship1.png")} //รอทำ data ยาน
-            />
+
+            <Carousel
+                    ref={carouselRef}
+                    data={data}
+                    style={styles.Carousel}
+                    renderItem={renderItem}
+                    sliderWidth={Dimensions.get('window').width*0.9}
+                    itemWidth={Dimensions.get('window').width*0.30}
+                    activeSlideAlignment={'start'}
+                    loop={true}
+                    loopClonesPerSide={5}
+                />
           </View>
 
-          <View style={{ justifyContent: 'center', alignItems: 'center'}}>
-            <TouchableOpacity style={styles.Select}>
-              <Text style={{ fontSize: 18 }}>Select spaceship</Text>
-            </TouchableOpacity>
           </View>
         </View>
         </View>
@@ -61,12 +75,14 @@ const windowHeight = Dimensions.get('window').height
 const styles = StyleSheet.create({
   titleship: {
     fontSize: 24,
-    textAlign: 'center',
-    color: 'black'
+    marginRight: 10,
+    color: 'white',
+    fontWeight: 'bold'
   },
   textTitle: {
     fontSize: 36,
     color: 'white',
+    fontWeight: 'bold'
   },
   Spaceship: {
     height: 100,
@@ -94,27 +110,25 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.40,
     shadowRadius: 10.19,
     elevation: 20,
+    marginTop: windowHeight * 0.06,
+    marginBottom: windowHeight * 0.04,
   },
   profilePic: {
     width: 180,
     height: 180,
     borderColor: "white",
-    borderWidth: 1.5,
+    borderWidth: 5,
     borderRadius: 90,
     margin: 10,
+    marginBottom: windowHeight * 0.04,
   },
   detail:{
-    shadowColor: '#000',
-    shadowRadius: 10,
-    shadowOpacity:1,
-    backgroundColor: '#eeeeee',
-    marginTop: 20,
     height: '70%',
     alignItems: 'center',
   },
   DetailBox: {
     height: windowHeight * 0.1,
-    backgroundColor: '#dddddd',
+    backgroundColor: '#1f4068',
     width: windowWidth * 0.9,
     marginTop:30,
     alignSelf: 'center',
@@ -132,42 +146,42 @@ const styles = StyleSheet.create({
     width: Dimensions.get('window').width,
     height: Dimensions.get('window').height,
   },
-  pictitle: {
-    width: 150,
-    height: 80,
-    marginTop: windowHeight * 0.04,
-  },
+
   ship: {
     borderRadius: 15,
     width: windowWidth * 0.9,
     marginTop:30,
-    backgroundColor: '#dddddd',
+    backgroundColor: '#1f4068',
     paddingBottom: 10,
     
   },
   topship: {
-    height: 60,
+    height: 40,
     width: windowWidth * 0.45,
     borderRadius: 15,
-    justifyContent: 'center',
-    alignSelf: 'center',
+    marginTop:15,
+    marginLeft: windowWidth *0.05,
+    flexDirection: 'row',
   },
   bottomship: {
     justifyContent: 'center',
     alignItems: 'center',
   },
   spaceShip: {
-    width: 180,
-    height: 180,
-    marginTop:30,
+    width: windowWidth*0.3,
+    height: windowHeight*0.1,
+
+
   },
   Select: {
-    width: windowWidth * 0.85,
-    height: 60,
-    backgroundColor: "#ffc93c",
-    borderRadius: 10,
+    height:30,
+    backgroundColor: "#0f3057",
+    borderColor: 'rgb(0,142,255)',
+    borderWidth: 2,
+    borderRadius: 5,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: 5,
   },
   linear: {
     width: windowWidth,

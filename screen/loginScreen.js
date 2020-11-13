@@ -37,7 +37,7 @@ const MyloginPage = (props) => {
         })).start( ()=>{movebg.setValue(0)});
     }
 
-    const [loginState, setLoginState] = useState('Login');
+    const [loginState, setLoginState] = useState('Travel Trought Space');
     const [Username, setUsername] = useState('');
     const [Password, setPassword] = useState('');
     const [name, setname] = useState('');
@@ -60,7 +60,6 @@ const MyloginPage = (props) => {
                 setId(data.user.uid);
              })
             firebase.database().ref('UsersList/').push({
-                    userId,
                     email,
                     fname,
                     lname,
@@ -93,12 +92,14 @@ const MyloginPage = (props) => {
         }
     }
     const RenderTheBox = (boxType) => {
-        if (boxType === 'Login') {
+        if (boxType === 'Travel Trought Space') {
             return (
                 <View style={styles.loginBox}>
                     
                     <TextInput
                         placeholder={'Username'}
+                        color='white'
+                        fontWeight='bold'
                         placeholderTextColor="#ccc"
                         style={styles.TextBox}
                         autoCorrect={false}
@@ -108,6 +109,8 @@ const MyloginPage = (props) => {
                     <TextInput
                         placeholder={'Password'}
                         placeholderTextColor="#ccc"
+                        color='white'
+                        fontWeight='bold'
                         style={styles.TextBox}
                         secureTextEntry={true}
                         autoCorrect={false}
@@ -138,6 +141,8 @@ const MyloginPage = (props) => {
                     <TextInput
                         placeholder={'Username'}
                         placeholderTextColor="#ccc"
+                        color='white'
+                        fontWeight='bold'
                         style={styles.TextBox}
                         autoCorrect={false}
                         autoCapitalize="none"
@@ -146,6 +151,8 @@ const MyloginPage = (props) => {
                     <TextInput
                         placeholder={'Password'}
                         placeholderTextColor="#ccc"
+                        color='white'
+                        fontWeight='bold'
                         style={styles.TextBox}
                         secureTextEntry={true}
                         autoCorrect={false}
@@ -155,6 +162,8 @@ const MyloginPage = (props) => {
                     <TextInput
                         placeholder={'name'}
                         placeholderTextColor="#ccc"
+                        color='white'
+                        fontWeight='bold'
                         style={styles.TextBox}
                         autoCapitalize="none"
                         onChangeText={(name) => setname(name)}
@@ -162,7 +171,10 @@ const MyloginPage = (props) => {
                     <TextInput
                         placeholder={'Surname'}
                         placeholderTextColor="#ccc"
+                        color='white'
+                        fontWeight='bold'
                         style={styles.TextBox}
+                        color
                         autoCapitalize="none"
                         onChangeText={(sur) => setsurname(sur)}
                     />
@@ -172,7 +184,7 @@ const MyloginPage = (props) => {
                     ><Text style={styles.Textinbutton}>Register</Text></TouchableOpacity>
 
                     <TouchableOpacity style={styles.cancelbutton}
-                        onPress={() => onpressLogin('Login')}
+                        onPress={() => onpressLogin('Travel Trought Space')}
                     ><Text style={styles.Textinbutton}>Cancel</Text></TouchableOpacity>
                 </View>
             );
