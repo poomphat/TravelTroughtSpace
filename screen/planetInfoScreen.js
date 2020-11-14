@@ -7,6 +7,7 @@ import { AntDesign } from '@expo/vector-icons';
 import LottieView from 'lottie-react-native';
 import * as Font from 'expo-font';
 import { useFonts } from 'expo-font';
+import * as Animatable from 'react-native-animatable';
 
 const Listdata = [
           'ความหนาแน่นเฉลี่ย 5,520 กิโลกรัม/ลูกบาศก์เมตร',
@@ -27,8 +28,11 @@ const PlanetInfo = (props) => {
   if (!loaded) {
       return null;
   }
-  const datailfirst = Listdata.map((data) => {
-    return <View style={styles.list}><Text style={{color: 'white', fontFamily:'Kanit', fontSize: 16,padding: 15,}}>{data}</Text></View>
+  const datailfirst = Listdata.map((data, index) => {
+    return (<View style={styles.list}>
+      <Text style={{color: 'white', fontFamily:'Kanit', fontSize: 16,padding: 15,}}>{data}
+      </Text>
+      </View>)
   });
   const backbutton = () => {
     return(

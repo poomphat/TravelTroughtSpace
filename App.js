@@ -7,6 +7,7 @@ import LoadingScreen from './component/loadingScreen';
 import MainScreen from './screen/mainScreen';
 import PlanetNavigator from './navigation/SpaceNavigator';
 import SolarSystemScreen from "./screen/solarsystemScreen";
+import CommentList from "./component/commentList";
 
 export default function App() {
   return (

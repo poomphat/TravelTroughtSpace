@@ -1,5 +1,6 @@
 import React, { Component, useState, useRef } from "react";
 import { Pages } from "react-native-pages";
+
 import {
   StyleSheet,
   Text,

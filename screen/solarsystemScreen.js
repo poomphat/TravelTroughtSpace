@@ -103,9 +103,9 @@ const styles = StyleSheet.create({
         height: 300,
     },
     boxdetail: {
-        width: Dimensions.get('window').width * 0.8,
+        width: Dimensions.get('window').width * 0.9,
         height: 250,
-        backgroundColor: 'white',
+        backgroundColor: '#1f4068',
         borderRadius: 20,
         marginBottom: 20,
         justifyContent: 'center',

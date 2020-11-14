@@ -6,13 +6,15 @@ import PlanetInfo from "../screen/planetInfoScreen";
 import Profile from "../component/Profile"
 import MyloginPage from "../screen/loginScreen";
 import solarSystemScreen from "../screen/solarsystemScreen";
+import CommentList from "../component/commentList";
 const planetNavigator = createStackNavigator(
     {
         loginScreen:MyloginPage,
+        solarSystem:solarSystemScreen,
         mainScreen:MainScreen,
         planetInfo:PlanetInfo,
         profile:Profile,
-        solarSystem:solarSystemScreen,
+        comment:CommentList,
     },
     {
         defaultNavigationOptions: {

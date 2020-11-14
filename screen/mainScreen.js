@@ -4,7 +4,7 @@ import CurrentPlanet from "../component/currentPlanet";
 import { StyleSheet, Text, View, Image, Platform, Button, Dimensions, ImageBackground, Modal } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { FontAwesome, AntDesign,Entypo } from '@expo/vector-icons';
-
+import * as Animatable from 'react-native-animatable';
 const MainScreen = (props) => {
     const [modalVisible, setModalVisible] = useState(false);
     return (
@@ -34,22 +34,25 @@ const MainScreen = (props) => {
                                     }}
                                 ><FontAwesome name="close" size={30} color="white" />
                                 </TouchableOpacity></View>
-                            <View style={{alignItems: 'center', marginBottom:  Dimensions.get('window').height * 0.02}}>
+                            <Animatable.View style={{alignItems: 'center', marginBottom:  Dimensions.get('window').height * 0.02}} animation="fadeIn" delay={0}>
                             <TouchableOpacity style={styles.buttonW}
                                                 onPress={() => {
                                                     setModalVisible(!modalVisible);
                                                     props.navigation.navigate("planetInfo")}}>
                             <Entypo name="magnifying-glass" size={40} color="white" /><Text style={{fontWeight: 'bold',color: 'white'}}> Discover </Text>
                             </TouchableOpacity>
-                            </View>
-                            <View style={styles.doublebutton}>
+                            </Animatable.View>
+                            <Animatable.View style={styles.doublebutton} animation="fadeIn" delay={200}>
                             <TouchableOpacity style={styles.buttonQ}>
                                 <AntDesign name="form" size={40} color="white" /><Text style={{fontWeight: 'bold',color: 'white'}}> Quiz</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity style={styles.buttonC}>
+                            <TouchableOpacity style={styles.buttonC}
+                                 onPress={() => {
+                                    setModalVisible(!modalVisible);
+                                    props.navigation.navigate("comment")}}>
                                 <FontAwesome name="comments" size={40} color="white" /><Text style={{fontWeight: 'bold',color: 'white'}}>Comment</Text>
                             </TouchableOpacity>
-                            </View>
+                            </Animatable.View>
                         </View>
                     </View>
                 </Modal>
