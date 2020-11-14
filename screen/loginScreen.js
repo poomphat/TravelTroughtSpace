@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Platform, StyleSheet, Text, View, Animated, Image, Dimensions, TextInput, Button,Easing } from 'react-native';
+import { Platform, StyleSheet, Text, View, Animated, Image, Dimensions, TextInput, Button,Easing,KeyboardAvoidingView } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as firebase from 'firebase';
 import LottieView from 'lottie-react-native';
@@ -193,12 +193,16 @@ const MyloginPage = (props) => {
 
     return (
         <View style={styles.container}>
-
+ 
             <Animated.Image source={require('../assets/bg.png')} style={{
                 transform: [{ rotate: translate }], 
                 position: 'absolute',
                 height: '150%',
             }} resizeMode="repeat" />
+            <KeyboardAvoidingView
+                style={{alignItems: 'center',
+                justifyContent: "center",}}
+                behavior='padding'>
             <Text style={styles.statuslog}>{loginState}</Text>
             <LottieView
                 autoPlay={true}
@@ -207,9 +211,11 @@ const MyloginPage = (props) => {
                     
                 }}
                 source={require('../assets/man.json')}
-            />
+            /> 
+           
             {RenderTheBox(loginState)}
             {ani()}
+            </KeyboardAvoidingView>
         </View>
     );
 };
