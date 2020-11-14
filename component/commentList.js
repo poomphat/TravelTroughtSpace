@@ -46,7 +46,7 @@ const commentList = (props) => {
 
     const renderItem = ({ item, index }) => {
         return (
-            <Animatable.View style={styles.box} key={item.Author} animation="bounceIn" delay={50 * index}>
+            <Animatable.View style={styles.box} key={item.Author} animation="zoomIn" delay={50*index}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Image
                         style={styles.profilePic}
@@ -93,16 +93,16 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width * 0.9,
         height: Dimensions.get('window').height * 0.13,
         backgroundColor: 'grey',
-        marginTop: Dimensions.get('window').height * 0.02,
+        marginVertical: Dimensions.get('window').height * 0.01,
         backgroundColor: '#1f4068',
         borderRadius: 20,
     },
     commentall: {
-        height: Dimensions.get('window').height * 0.8
+        height: Dimensions.get('window').height * 0.8,
     },
     commentlist: {
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
     },
     textTitle: {
         marginLeft: 10,
@@ -136,7 +136,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     TextBox: {
-        marginTop: Dimensions.get('window').height * 0.02,
         height: Dimensions.get('window').height * 0.09,
         width: Dimensions.get('window').width,
         backgroundColor: '#1f4068',

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Platform, StyleSheet, Text, View, Animated, Image, Dimensions, TextInput, Button,Easing,KeyboardAvoidingView } from 'react-native';
+import { Platform, StyleSheet, Text, View, Animated, Dimensions, TextInput, Button,Easing,KeyboardAvoidingView } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as firebase from 'firebase';
 import LottieView from 'lottie-react-native';
@@ -201,8 +201,8 @@ const MyloginPage = (props) => {
             }} resizeMode="repeat" />
             <KeyboardAvoidingView
                 style={{alignItems: 'center',
-                justifyContent: "center",}}
-                behavior='padding'>
+                justifyContent: "center"}}
+                behavior={Platform.OS == "ios" ? "padding" : null}>
             <Text style={styles.statuslog}>{loginState}</Text>
             <LottieView
                 autoPlay={true}
