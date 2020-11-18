@@ -4,10 +4,9 @@ import LottieView from 'lottie-react-native';
 import * as Font from 'expo-font';
 import { useFonts } from 'expo-font';
 import ProgressBar from 'react-native-progress/Bar'
-import { timing } from 'react-native-reanimated';
 
 
-const loadingScreen = (props) => {
+const LoadingScreen = (props) => {
 
 
     const [loaded] = useFonts({
@@ -41,7 +40,7 @@ const loadingScreen = (props) => {
         </View>
     );
 }
-export default loadingScreen;
+export default LoadingScreen;
 
 const styles = StyleSheet.create({
     container: {

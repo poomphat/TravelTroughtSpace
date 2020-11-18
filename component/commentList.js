@@ -46,7 +46,7 @@ const commentList = (props) => {
 
     const renderItem = ({ item, index }) => {
         return (
-            <Animatable.View style={styles.box} key={item.Author} animation="zoomIn" delay={50*index}>
+            <Animatable.View style={styles.box} key={item.Author} animation="zoomIn" delay={50*index} duration={500}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Image
                         style={styles.profilePic}
@@ -64,12 +64,13 @@ const commentList = (props) => {
                 behavior="padding">
                 <Text style={styles.Title}>Comment</Text>
                 <FlatList
+                    showsHorizontalScrollIndicator={false}
+                    showsVerticalScrollIndicator={false}
                     style={styles.commentall}
                     renderItem={renderItem}
                     data={data}
                     keyExtractor={item => item.id}
-                    inverted={true}>
-                </FlatList>
+                    inverted={false}/>
                 <View style={styles.TextBox}>
                     <TextInput
                         placeholder={'Comment'}
@@ -138,7 +139,7 @@ const styles = StyleSheet.create({
     TextBox: {
         height: Dimensions.get('window').height * 0.09,
         width: Dimensions.get('window').width,
-        backgroundColor: '#1f4068',
+        backgroundColor: '#29435c',
         flexDirection: 'row',
         justifyContent: 'center',
     },
@@ -155,7 +156,7 @@ const styles = StyleSheet.create({
         marginTop: Dimensions.get('window').height * 0.02,
         height: 40,
         padding: 7,
-        backgroundColor: '#021f36',
+        //backgroundColor: '#021f36',
         borderRadius: 7,
     }
 })

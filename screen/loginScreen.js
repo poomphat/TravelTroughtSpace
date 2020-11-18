@@ -3,6 +3,7 @@ import { Platform, StyleSheet, Text, View, Animated, Dimensions, TextInput, Butt
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as firebase from 'firebase';
 import LottieView from 'lottie-react-native';
+import AwesomeAlert from 'react-native-awesome-alerts';
 
 const firebaseConfig = {
     apiKey: "AIzaSyD7hO4qUYDmmucGuiEvXAlN2WZQfh4Q5DY",
@@ -26,7 +27,7 @@ const MyloginPage = (props) => {
         outputRange: ['0deg','360deg'],
     });
 
-    const ani = () => {
+    useEffect (() => {
         Animated.loop(
             Animated.timing(
             movebg, {
@@ -35,7 +36,13 @@ const MyloginPage = (props) => {
             useNativeDriver: true,
             easing : Easing.linear,
         })).start( ()=>{movebg.setValue(0)});
-    }
+    })
+
+    const [alertsuccess, setalertsuccess] = useState(false);
+    const [alertfailed, setalertfailed] = useState(false);
+
+    const [alertregissuccess, setalertregissuccess] = useState(false);
+    const [alertregisfailed, setalertregisfailed] = useState(false);
 
     const [loginState, setLoginState] = useState('Travel Trought Space');
     const [Username, setUsername] = useState('');
@@ -54,42 +61,156 @@ const MyloginPage = (props) => {
         
     }
     const signUpUser = (email, password,fname,lname) => {
-        try {
+        //try {
             firebase.auth().createUserWithEmailAndPassword(email, password).then(data => {  
                 console.log("User ID :- ", data.user.uid);
                 setId(data.user.uid);
-             })
-            firebase.database().ref('UsersList/').push({
+                firebase.database().ref('UsersList/').push({
                     email,
                     fname,
                     lname,
-                }).then((data)=>{
-                    //success callback
-                    console.log('data ' , data)
-                }).catch((error)=>{
-                    //error callback
-                    console.log('error ' , error)
                 })
+               setalertregissuccess(true)
+                setTimeout(() => {
+                    setalertregissuccess(false)
+                }, 2500);
+                setTimeout(() => {
+                    setLoginState('Travel Trought Space')
+                }, 3000);
+             }).catch(error =>{
+                console.log(error.toString())
+                setalertregisfailed(true)
+             })
             
-        }
-        catch (error) {
-            console.log(error.toString())
-        }
+            
+        //}
     }
     const loginUser = (email, password) => {
 
-        try {
-
+        //try {
             firebase.auth().signInWithEmailAndPassword(email, password).then(function (user) {
+                setalertsuccess(true)
+                setTimeout(() => {
+                    console.log('Waitng')
+                    props.navigation.navigate('mainScreen')
+                    setalertsuccess(false)
+                  }, 2500);
                 console.log('finishlogin')
-                props.navigation.navigate('mainScreen')
-
+            
+            }).catch(error => {
+                console.log('error ' , error)
+                setalertfailed(true)
             })
             
-        }
+        //}
+        /*
         catch (error) {
             console.log(error.toString())
         }
+        */
+    }
+    const renderCustomAlertView = () => {
+        return(
+            <View style={{alignItems: 'center'}}>
+                 <LottieView
+                autoPlay={true}
+                loop={false}
+                style={{
+                    width: Dimensions.get('window').width*0.2,
+                    
+                }}
+                source={require('../assets/success.json')}
+            />
+            <View style={{alignItems: 'center', marginTop: 20}}>
+                <Text style={styles.Textalert}>Login success!!</Text>
+                <Text style={styles.Textalertmini}>Now you ready to travel in space.</Text>
+            </View>
+            <TouchableOpacity style={styles.gotravelbutton}
+                onPress={() => {
+                    setalertsuccess(false)
+                }}>
+                <Text style={styles.Textinbutton}>Travel!!</Text>
+                </TouchableOpacity>
+            </View>
+        )
+    }
+    const renderCustomAlertViewFailed = () => {
+        return(
+            <View style={{alignItems: 'center'}}>
+                 <LottieView
+                autoPlay={true}
+                loop={false}
+                style={{
+                    width: Dimensions.get('window').width*0.2,
+                    
+                }}
+                source={require('../assets/failure.json')}
+            />
+            <View style={{alignItems: 'center', marginTop: 20}}>
+                <Text style={styles.Textalert}>Failed to login</Text>
+                <Text style={styles.Textalertmini}>Check your E-mail and password!!</Text>
+            </View>
+            <TouchableOpacity style={styles.failedlbutton}
+            onPress={() => {
+                setalertfailed(false)
+            }}>
+                <Text style={styles.Textinbutton}>
+                OK</Text>
+                </TouchableOpacity>
+            </View>
+        )
+    }
+    const renderCustomAlertViewregis = () => {
+        return(
+            <View style={{alignItems: 'center'}}>
+                 <LottieView
+                autoPlay={true}
+                loop={false}
+                style={{
+                    width: Dimensions.get('window').width*0.2,
+                    
+                }}
+                source={require('../assets/success.json')}
+            />
+            <View style={{alignItems: 'center', marginTop: 20}}>
+                <Text style={styles.Textalert}>Register success!!</Text>
+                <Text style={styles.Textalertmini}>Go to login and travel trought Universe.</Text>
+            </View>
+            <TouchableOpacity style={styles.failedlbutton}
+            onPress={() => {
+                setalertregissuccess(false)
+            }}>
+                <Text style={styles.Textinbutton}>
+                OK</Text>
+                </TouchableOpacity>
+            </View>
+        )
+    }
+    const renderCustomAlertViewFailedregis = () => {
+        return(
+            <View style={{alignItems: 'center'}}>
+                 <LottieView
+                autoPlay={true}
+                loop={false}
+                style={{
+                    width: Dimensions.get('window').width*0.2,
+                    
+                }}
+                source={require('../assets/failure.json')}
+            />
+            <View style={{alignItems: 'center', marginTop: 20}}>
+                <Text style={styles.Textalert}>Failed to register</Text>
+                <Text style={styles.Textalertmini}>Check your information</Text>
+            </View>
+            <TouchableOpacity style={styles.failedlbutton}
+            onPress={() => {
+                setalertregisfailed(false)
+            }}>
+                <Text style={styles.Textinbutton}>
+                OK</Text>
+                </TouchableOpacity>
+            </View>
+        )
     }
     const RenderTheBox = (boxType) => {
         if (boxType === 'Travel Trought Space') {
@@ -97,7 +218,7 @@ const MyloginPage = (props) => {
                 <View style={styles.loginBox}>
                     
                     <TextInput
-                        placeholder={'Username'}
+                        placeholder={'Email'}
                         color='white'
                         fontWeight='bold'
                         placeholderTextColor="#ccc"
@@ -118,7 +239,7 @@ const MyloginPage = (props) => {
                         onChangeText={(pass) => setPassword(pass)}
                     />
                     <TouchableOpacity style={styles.Loginbutton}
-                        onPress={() => loginUser(Username, Password)}
+                        onPress={() => {loginUser(Username, Password)}}
                     ><Text style={styles.Textinbutton}>Login</Text></TouchableOpacity>
                     {/*<TouchableOpacity style={styles.Loginbutton}
                         onPress={() => logout()}
@@ -139,7 +260,7 @@ const MyloginPage = (props) => {
                 <View style={[styles.loginBox, styles.regisBox]}>
 
                     <TextInput
-                        placeholder={'Username'}
+                        placeholder={'Email'}
                         placeholderTextColor="#ccc"
                         color='white'
                         fontWeight='bold'
@@ -169,7 +290,7 @@ const MyloginPage = (props) => {
                         onChangeText={(name) => setname(name)}
                     />
                     <TextInput
-                        placeholder={'Surname'}
+                        placeholder={'lastname'}
                         placeholderTextColor="#ccc"
                         color='white'
                         fontWeight='bold'
@@ -193,16 +314,16 @@ const MyloginPage = (props) => {
 
     return (
         <View style={styles.container}>
- 
+ <KeyboardAvoidingView
+                style={{alignItems: 'center',
+                justifyContent: "center"}}
+                behavior={Platform.OS == "ios" ? "padding" :'height'}>
             <Animated.Image source={require('../assets/bg.png')} style={{
                 transform: [{ rotate: translate }], 
                 position: 'absolute',
-                height: '150%',
+                height: '200%',
             }} resizeMode="repeat" />
-            <KeyboardAvoidingView
-                style={{alignItems: 'center',
-                justifyContent: "center"}}
-                behavior={Platform.OS == "ios" ? "padding" : null}>
+            
             <Text style={styles.statuslog}>{loginState}</Text>
             <LottieView
                 autoPlay={true}
@@ -214,7 +335,42 @@ const MyloginPage = (props) => {
             /> 
            
             {RenderTheBox(loginState)}
-            {ani()}
+            <AwesomeAlert
+                show={alertsuccess}
+                showProgress={false}
+                customView={renderCustomAlertView()}
+                closeOnTouchOutside={true}
+                closeOnHardwareBackPress={false}
+                contentContainerStyle={styles.alert}
+                overlayStyle={styles.bgalert}
+                />
+             <AwesomeAlert
+                show={alertfailed}
+                showProgress={false}
+                customView={renderCustomAlertViewFailed()}
+                closeOnTouchOutside={true}
+                closeOnHardwareBackPress={false}
+                contentContainerStyle={styles.alert}
+                overlayStyle={styles.bgalert}
+                />
+            <AwesomeAlert
+                show={alertregissuccess}
+                showProgress={false}
+                customView={renderCustomAlertViewregis()}
+                closeOnTouchOutside={true}
+                closeOnHardwareBackPress={false}
+                contentContainerStyle={styles.alert}
+                overlayStyle={styles.bgalert}
+                />
+             <AwesomeAlert
+                show={alertregisfailed}
+                showProgress={false}
+                customView={renderCustomAlertViewFailedregis()}
+                closeOnTouchOutside={true}
+                closeOnHardwareBackPress={false}
+                contentContainerStyle={styles.alert}
+                overlayStyle={styles.bgalert}
+                />
             </KeyboardAvoidingView>
         </View>
     );
@@ -226,7 +382,6 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: "center",
-        width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
     },
     loginBox: {
@@ -302,5 +457,43 @@ const styles = StyleSheet.create({
         fontSize: 40,
         color: "rgb(0,142,255)",
         fontWeight: 'bold'
+    },
+    alert:{
+        backgroundColor: '#1f4068',
+        borderRadius: 10,
+        width: Dimensions.get('window').width*0.7,
+    },
+    Textalert:{
+        fontSize: 24,
+        color: 'white',
+        fontWeight: 'bold'
+    },
+    Textalertmini:{
+        marginTop: 20,
+        fontSize: 14,
+        color: 'white',
+        fontWeight: 'bold'
+    },
+    gotravelbutton:{
+        marginTop: 20,
+        backgroundColor: 'rgb(48,209,88)',
+        width: Dimensions.get('window').width*0.6,
+        height: 40,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 7,
+    },
+    bgalert:{
+        backgroundColor: '#000000bb'
+    },
+    failedlbutton:{
+        marginTop: 20,
+        backgroundColor: 'rgb(255,69,58)',
+        width: Dimensions.get('window').width*0.6,
+        height: 40,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 7,
     }
+
 });

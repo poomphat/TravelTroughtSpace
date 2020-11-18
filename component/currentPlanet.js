@@ -1,4 +1,4 @@
-import React, { Component, useState, useRef } from "react";
+import React, { Component, useState, useRef, useEffect } from "react";
 import { Pages } from "react-native-pages";
 
 import {
@@ -36,15 +36,16 @@ const CurrentPlanet = (props) => {
     inputRange: [0, 1],
     outputRange: ["0deg", "360deg"],
   });
-
-  Animated.loop(
-    Animated.timing(moveplanet, {
-      toValue: 1,
-      duration: 80000,
-      useNativeDriver: true,
-      easing: Easing.linear,
-    })
-  ).start();
+  useEffect (() =>{
+    Animated.loop(
+      Animated.timing(moveplanet, {
+        toValue: 1,
+        duration: 20000,
+        useNativeDriver: true,
+        easing: Easing.linear,
+      })
+    ).start();
+  },[])
   const [currentPlanet, setCurrentPlanet] = useState("earth");
   return (
     <View style={styles.container}>
@@ -55,7 +56,7 @@ const CurrentPlanet = (props) => {
         onPress={props.planetclicked}
       >
         <Animated.Image
-          style={{ transform: [{ rotate: rotate }] }}
+          style={{ transform: [{ rotate: rotate }],width: '150%',height: '100%'}}
           source={tempplanetdata[currentPlanet].url} //รอทำ data ดาว
         />
       </TouchableOpacity>
@@ -96,8 +97,8 @@ const styles = StyleSheet.create({
         //top:"60%",
     }*/,
   touchPlanet: {
-    top: "60%",
-    height: windowHeight * 0.8,
+    top: "55%",
+    height: windowHeight * 0.7,
     width: windowWidth,
     alignItems: "center",
   },

@@ -25,11 +25,11 @@ const UserInfo = (props) =>{
                 <ProgressBar
                     progress={exp} 
                     width={200}
-                    height={20}
+                    height={15}
                     animated={true}
                     color={"lime"} //รอแก้สี
                     borderWidth={2}
-                    borderColor={"yellow"}
+                    borderColor={"white"}
                 />
             </View>
             <View style={styles.profileName}>

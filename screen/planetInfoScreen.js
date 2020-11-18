@@ -92,16 +92,6 @@ const PlanetInfo = (props) => {
         </View>
         {backbutton()}
       </View>
-
-      <View style={{ flex: 1, backgroundColor: '#F54291', justifyContent: 'center',alignItems: 'center'}}>
-      {backbutton()}
-        <TouchableOpacity style={styles.Quiz}>
-          <AntDesign name="form" size={140} color="black" /><Text style={{fontFamily: 'Kanit'}}> Quiz</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.Comment}>
-          <FontAwesome name="comments" size={140} color="black" /><Text>Comment</Text>
-        </TouchableOpacity>
-      </View>
     </Pages>
     
 

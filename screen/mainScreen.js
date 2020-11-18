@@ -1,65 +1,81 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import UserInfo from "../component/userInfo";
 import CurrentPlanet from "../component/currentPlanet";
 import { StyleSheet, Text, View, Image, Platform, Button, Dimensions, ImageBackground, Modal,KeyboardAvoidingView } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { FontAwesome, AntDesign,Entypo } from '@expo/vector-icons';
 import * as Animatable from 'react-native-animatable';
+import LoadingScreen from "../component/LoadingScreen";
+import { Assets } from 'react-navigation-stack';
+
 const MainScreen = (props) => {
     const [modalVisible, setModalVisible] = useState(false);
-    return (
-        <ImageBackground source={require('../assets/bg.png')} style={styles.container} resizeMode="repeat">
-            <View>
-                <UserInfo
-                    Gotoprofile={() => { props.navigation.navigate("profile") }} />
-                <CurrentPlanet
-                    planetclicked={() => {
-                        setModalVisible(true);
-                    }
-                    }
-                    onSolarClicked={() => { props.navigation.navigate("solarSystem") }}
-                />
-                <Modal
-                    animationType="slide"
-                    transparent={true}
-                    visible={modalVisible}
-                >
-                    <View style={styles.centeredView}>
-                        <View style={styles.modalView}>
-                            <Text style={styles.modalText}>Earth</Text>
-                            <View style={styles.closebuttonView}>
-                                <TouchableOpacity
-                                    onPress={() => {
-                                        setModalVisible(!modalVisible);
-                                    }}
-                                ><FontAwesome name="close" size={30} color="white" />
-                                </TouchableOpacity></View>
-                            <Animatable.View style={{alignItems: 'center', marginBottom:  Dimensions.get('window').height * 0.02}} animation="zoomIn" delay={100}>
-                            <TouchableOpacity style={styles.buttonW}
-                                                onPress={() => {
-                                                    setModalVisible(!modalVisible);
-                                                    props.navigation.navigate("planetInfo")}}>
-                            <Entypo name="magnifying-glass" size={40} color="white" /><Text style={{fontWeight: 'bold',color: 'white'}}> Discover </Text>
-                            </TouchableOpacity>
-                            </Animatable.View>
-                            <Animatable.View style={styles.doublebutton} animation="zoomIn" delay={200}>
-                            <TouchableOpacity style={styles.buttonQ}>
-                                <AntDesign name="form" size={40} color="white" /><Text style={{fontWeight: 'bold',color: 'white'}}> Quiz</Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity style={styles.buttonC}
-                                 onPress={() => {
-                                    setModalVisible(!modalVisible);
-                                    props.navigation.navigate("comment")}}>
-                                <FontAwesome name="comments" size={40} color="white" /><Text style={{fontWeight: 'bold',color: 'white'}}>Comment</Text>
-                            </TouchableOpacity>
-                            </Animatable.View>
-                        </View>
-                    </View>
-                </Modal>
+    const [imgLoaded, setImgLoaded] = useState(0);
+    
+    var toRender = ""
+    /*
+    useEffect(async () => {
+        await const bg = require('../assets/bg.png') 
+    })
+    */
+       
+    return(
+        <View>
+        {
+            imgLoaded>0?null:<LoadingScreen/>
+        }
+        <ImageBackground source={require('../assets/bg.png')} style={styles.container} resizeMode="repeat" onload={() => {setImgLoaded(1)}}>
+                    <View>
+                        <UserInfo
+                            Gotoprofile={() => { props.navigation.navigate("profile") }} />
+                        <CurrentPlanet
+                            planetclicked={() => {
+                                setModalVisible(true);
+                            }
+                            }
+                            onSolarClicked={() => { props.navigation.navigate("solarSystem") }}
+                        />
+                        <Modal
+                            animationType="slide"
+                            transparent={true}
+                            visible={modalVisible}>
+                            <View style={styles.centeredView}>
+                                <View style={styles.modalView}>
+                                    <Text style={styles.modalText}>Earth</Text>
+                                    <View style={styles.closebuttonView}>
+                                        <TouchableOpacity
+                                            onPress={() => {
+                                                setModalVisible(!modalVisible);
+                                            }}
+                                        ><FontAwesome name="close" size={30} color="white" />
+                                        </TouchableOpacity></View>
+                                    <Animatable.View style={{alignItems: 'center', marginBottom:  Dimensions.get('window').height * 0.02}} animation="zoomIn" delay={20} duration={500}>
+                                        <TouchableOpacity style={styles.buttonW}
+                                                            onPress={() => {
+                                                                setModalVisible(!modalVisible);
+                                                                props.navigation.navigate("planetInfo")}}>
+                                        <Entypo name="magnifying-glass" size={40} color="white" /><Text style={{fontWeight: 'bold',color: 'white'}}> Discover </Text>
+                                        </TouchableOpacity>
+                                        </Animatable.View>
+                                        <Animatable.View style={styles.doublebutton} animation="zoomIn" delay={70} duration={500}>
+                                        <TouchableOpacity style={styles.buttonQ}>
+                                            <AntDesign name="form" size={40} color="white" /><Text style={{fontWeight: 'bold',color: 'white'}}> Quiz</Text>
+                                        </TouchableOpacity>
+                                        <TouchableOpacity style={styles.buttonC}
+                                            onPress={() => {
+                                                setModalVisible(!modalVisible);
+                                                props.navigation.navigate("comment")}}>
+                                            <FontAwesome name="comments" size={40} color="white" /><Text style={{fontWeight: 'bold',color: 'white'}}>Comment</Text>
+                                        </TouchableOpacity>
+                                    </Animatable.View>
+                                </View>
+                            </View>
+                        </Modal>
 
+                    </View>
+            </ImageBackground>
             </View>
-        </ImageBackground>
-    );
+        );                                  
 }
 const styles = StyleSheet.create({
     container: {
