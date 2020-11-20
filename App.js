@@ -11,9 +11,10 @@ import Quiz from "./component/Quiz";
 import FireBaseInit from "./firebase/FirebaseInit";
 
 FireBaseInit();
+
 export default function App() {
   return (
-      <Quiz planet={0}/>
+      <PlanetNavigator/>
   );
 }
 const styles = StyleSheet.create({

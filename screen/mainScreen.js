@@ -11,15 +11,7 @@ import { Assets } from 'react-navigation-stack';
 const MainScreen = (props) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [imgLoaded, setImgLoaded] = useState(false);
-    
-    var toRender = ""
-    
-    useEffect(async () => {
-        const bg = require('../assets/bg.png') 
-        setImgLoaded(!imgLoaded)
-    })
-    
-    if(imgload){
+
     return(
         <ImageBackground source={require('../assets/bg.png')} style={styles.container} resizeMode="repeat" onload={() => {setImgLoaded(1)}}>
                     <View>
@@ -55,7 +47,10 @@ const MainScreen = (props) => {
                                         </TouchableOpacity>
                                         </Animatable.View>
                                         <Animatable.View style={styles.doublebutton} animation="zoomIn" delay={70} duration={500}>
-                                        <TouchableOpacity style={styles.buttonQ}>
+                                        <TouchableOpacity style={styles.buttonQ}
+                                        onPress={() => {
+                                            setModalVisible(!modalVisible);
+                                            props.navigation.navigate("quiz",{planet:0})}}>
                                             <AntDesign name="form" size={40} color="white" /><Text style={{fontWeight: 'bold',color: 'white'}}> Quiz</Text>
                                         </TouchableOpacity>
                                         <TouchableOpacity style={styles.buttonC}
@@ -72,12 +67,7 @@ const MainScreen = (props) => {
                     </View>
             </ImageBackground>
         );
-    }
-    else{
-        return(
-            <LoadingScreen/>
-        );
-    }                                 
+                              
 }
 const styles = StyleSheet.create({
     container: {

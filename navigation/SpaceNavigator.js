@@ -7,6 +7,7 @@ import Profile from "../component/Profile"
 import MyloginPage from "../screen/loginScreen";
 import solarSystemScreen from "../screen/solarsystemScreen";
 import CommentList from "../component/commentList";
+import Quiz from "../component/Quiz";
 const planetNavigator = createStackNavigator(
     {
         loginScreen:MyloginPage,
@@ -15,6 +16,7 @@ const planetNavigator = createStackNavigator(
         planetInfo:PlanetInfo,
         profile:Profile,
         comment:CommentList,
+        quiz:Quiz
     },
     {
         defaultNavigationOptions: {

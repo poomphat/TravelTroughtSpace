@@ -17,13 +17,21 @@ import * as Font from 'expo-font';
 import { useFonts } from 'expo-font';
 const color = ['rgb(10,132,255)', 'rgb(235, 235, 235)']
 const Quiz = (props) => {
-    const countquest = quiznaja[props.planet].quizplan.length
+    const countquest = quiznaja[props.navigation.getParam("planet")].quizplan.length
     const [answerplan, setanswerplan] = useState([])
     const [hidden, sethidden] = useState(0)
     const [loaded, setloaded] = useState(false)
     const [loadedimge, setloadedimge] = useState(false)
     const [imageBg, setimageBg] = useState('')
-    var imageBruh = ""
+    const backbutton = () => {
+        return(
+            <TouchableOpacity 
+              onPress={() => props.navigation.goBack()}
+              style={styles.backbutton}>
+              <Ionicons name="ios-arrow-back" size={40} color="white"/>
+            </TouchableOpacity>
+        );
+      }
     useEffect(() => {
         if (!loaded) {
             const list = answerplan
@@ -51,7 +59,7 @@ const Quiz = (props) => {
         setanswerplan(listQ)
         sethidden(hidden + 1)
     }
-    const quizplanet = quiznaja[props.planet].quizplan
+    const quizplanet = quiznaja[props.navigation.getParam("planet")].quizplan
     if (loaded) {
         return (
             <Pages style={{backgroundColor: '#021F36'}}>
@@ -59,8 +67,8 @@ const Quiz = (props) => {
                     return (
 
                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                            <Image source={imageBg} style={styles.img} resizeMode="repeat"/>
-
+                            <Image source={{uri : 'https://firebasestorage.googleapis.com/v0/b/mobileapptroughtthespace.appspot.com/o/bg.png?alt=media&token=eb78cea0-1e29-40f8-91c6-f3a2a66b792f'}} style={styles.img} resizeMode="repeat"/>
+                        {backbutton()}
                             <View style={[styles.questionbox, { backgroundColor: item.color }]}>
                                 <Text style={styles.textquest}>{index + 1}. {item.question}</Text>
                             </View>
@@ -130,5 +138,13 @@ const styles = StyleSheet.create({
         position: 'absolute',
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
-    }
+    },
+    backbutton:{
+        width: 60,
+        height: 60,
+        position: 'absolute',
+        top: Dimensions.get('window').height*0.08,
+        left: Dimensions.get('window').width*0.08,
+        zIndex: 1,
+      },
 })
