@@ -10,20 +10,17 @@ import { Assets } from 'react-navigation-stack';
 
 const MainScreen = (props) => {
     const [modalVisible, setModalVisible] = useState(false);
-    const [imgLoaded, setImgLoaded] = useState(0);
+    const [imgLoaded, setImgLoaded] = useState(false);
     
     var toRender = ""
-    /*
+    
     useEffect(async () => {
-        await const bg = require('../assets/bg.png') 
+        const bg = require('../assets/bg.png') 
+        setImgLoaded(!imgLoaded)
     })
-    */
-       
+    
+    if(imgload){
     return(
-        <View>
-        {
-            imgLoaded>0?null:<LoadingScreen/>
-        }
         <ImageBackground source={require('../assets/bg.png')} style={styles.container} resizeMode="repeat" onload={() => {setImgLoaded(1)}}>
                     <View>
                         <UserInfo
@@ -74,8 +71,13 @@ const MainScreen = (props) => {
 
                     </View>
             </ImageBackground>
-            </View>
-        );                                  
+        );
+    }
+    else{
+        return(
+            <LoadingScreen/>
+        );
+    }                                 
 }
 const styles = StyleSheet.create({
     container: {

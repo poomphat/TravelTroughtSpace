@@ -7,10 +7,13 @@ import MainScreen from './screen/mainScreen';
 import PlanetNavigator from './navigation/SpaceNavigator';
 import SolarSystemScreen from "./screen/solarsystemScreen";
 import CommentList from "./component/commentList";
+import Quiz from "./component/Quiz";
+import FireBaseInit from "./firebase/FirebaseInit";
 
+FireBaseInit();
 export default function App() {
   return (
-      <PlanetNavigator/>
+      <Quiz planet={0}/>
   );
 }
 const styles = StyleSheet.create({

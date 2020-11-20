@@ -2,9 +2,11 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Platform, StyleSheet, Text, View, Animated, Dimensions, TextInput, Button,Easing,KeyboardAvoidingView } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as firebase from 'firebase';
+import FirebastInit from "../firebase/FirebaseInit"
 import LottieView from 'lottie-react-native';
 import AwesomeAlert from 'react-native-awesome-alerts';
 
+/*
 const firebaseConfig = {
     apiKey: "AIzaSyD7hO4qUYDmmucGuiEvXAlN2WZQfh4Q5DY",
     authDomain: "mobileapptroughtthespace.firebaseapp.com",
@@ -19,6 +21,8 @@ const firebaseConfig = {
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig);
 }
+*/
+FirebastInit()
 
 const MyloginPage = (props) => {
     const movebg = useRef(new Animated.Value(0)).current;
