@@ -13,7 +13,7 @@ export const quiznaja = [
                 rightchoice : 1
             },
             {
-                color : '#c02739',
+                color : '#ff6768',
                 question: 'โลกหมุนรอบตัวเองใช้เวลาเท่าใด',
                 choice : [
                     '23 ชั่วโมง 56 นาที',

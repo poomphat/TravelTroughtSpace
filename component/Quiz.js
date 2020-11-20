@@ -52,9 +52,9 @@ const Quiz = (props) => {
         sethidden(hidden + 1)
     }
     const quizplanet = quiznaja[props.planet].quizplan
-    if (loaded && loadedimge) {
+    if (loaded) {
         return (
-            <Pages>
+            <Pages style={{backgroundColor: '#021F36'}}>
                 {quizplanet.map((item, index) => {
                     return (
 
@@ -68,13 +68,15 @@ const Quiz = (props) => {
                                 {item.choice.map((itemin, indexchoice) => {
                                     return (
                                         <TouchableOpacity style={[styles.answer, answerplan[index][indexchoice] == 0
-                                            ? { backgroundColor: color[1] }
-                                            : { backgroundColor: color[0] }]}
+                                            ? { backgroundColor: color[1]}
+                                            : { backgroundColor: color[0]}]}
                                             onPress={() => {
                                                 answerQuest(index, indexchoice);
                                             }}>
-                                            <Text style={{ display: 'none' }}>{hidden}</Text>
-                                            <Text style={styles.textans}>{itemin}</Text>
+                                            <Text style={{ display: 'none'}}>{hidden}</Text>
+                                            <Text style={[styles.textans, answerplan[index][indexchoice] == 0
+                                                ? { color: 'black'}
+                                                : { color: 'white'}]}>{itemin}</Text>
                                         </TouchableOpacity>
                                     )
                                 })}
