@@ -1,10 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Platform, StyleSheet, Text, View, Animated, Dimensions, TextInput, Button,Easing,KeyboardAvoidingView } from 'react-native';
+import { Platform, StyleSheet, Text, View, Animated, Dimensions, TextInput, Button,Easing,KeyboardAvoidingView, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as firebase from 'firebase';
 import FirebastInit from "../firebase/FirebaseInit"
 import LottieView from 'lottie-react-native';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import { useSelector, useDispatch } from "react-redux";
 
 /*
 const firebaseConfig = {
@@ -54,6 +55,11 @@ const MyloginPage = (props) => {
     const [name, setname] = useState('');
     const [surname, setsurname] = useState('');
     const [Id, setId] = useState('');
+
+    //bg
+    const bg = useSelector( (state) => state.img.background );
+    //console.log("login : "+bg)
+
     const onpressLogin = (text) => {
         setLoginState(text)
         console.log(firebase.auth().currentUser);
@@ -99,6 +105,7 @@ const MyloginPage = (props) => {
                     props.navigation.navigate('mainScreen')
                     setalertsuccess(false)
                   }, 2500);
+                console.log(user.user.email)
                 console.log('finishlogin')
             
             }).catch(error => {
@@ -322,10 +329,11 @@ const MyloginPage = (props) => {
                 style={{alignItems: 'center',
                 justifyContent: "center"}}
                 behavior={Platform.OS == "ios" ? "padding" :'height'}>
-            <Animated.Image source={require('../assets/bg.png')} style={{
-                transform: [{ rotate: translate }], 
+            <Animated.Image source={{uri : bg}} style={{
+                transform : [{rotate : translate}],
                 position: 'absolute',
-                height: '200%',
+                height: '250%',
+                width:"250%"
             }} resizeMode="repeat" />
             
             <Text style={styles.statuslog}>{loginState}</Text>

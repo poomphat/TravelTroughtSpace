@@ -9,12 +9,19 @@ import SolarSystemScreen from "./screen/solarsystemScreen";
 import CommentList from "./component/commentList";
 import Quiz from "./component/Quiz";
 import FireBaseInit from "./firebase/FirebaseInit";
+import { Provider } from 'react-redux'
+import { createStore, combineReducers } from "redux";
+import firebaseReducer from "./store/reducers/firebaseReducer"
+
 
 FireBaseInit();
+const store = createStore(firebaseReducer);
 
 export default function App() {
   return (
+    <Provider store={store}>
       <PlanetNavigator/>
+    </Provider>
   );
 }
 const styles = StyleSheet.create({
