@@ -16,6 +16,8 @@ import LoadingScreen from "../component/LoadingScreen";
 import LottieView from 'lottie-react-native';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import { useSelector, useDispatch } from "react-redux";
+import {updateScore} from "../store/actions/storetemp"
+import { datasystem } from "../dataSystem/data"
 
 const color = ['rgb(10,132,255)', 'rgb(235, 235, 235)']
 const Quiz = (props) => {
@@ -26,6 +28,8 @@ const Quiz = (props) => {
     const [score, setscore] = useState(0)
     const [alertans, setalertans] = useState(false)
     const [countDown,setcountDown] = useState(3)
+
+    const dispatch = useDispatch();
     const backbutton = () => {
         return (
             <TouchableOpacity
@@ -59,6 +63,7 @@ const Quiz = (props) => {
         sethidden(hidden + 1)
     }
     const submitanswer = () => {
+
         let tempScore = 0
         quiznaja[props.navigation.getParam("planet")].quizplan.map((item, index) => {
             if (answerplan[index].findIndex(items => items == 1) == item.rightchoice) {
@@ -68,6 +73,8 @@ const Quiz = (props) => {
 
             //const index = state.favoriteMeals.findIndex(el => (el.id === action.mealId))
         })
+        const planetName = datasystem[props.navigation.getParam("planet")].title
+        dispatch(updateScore(planetName))
         setscore(tempScore)
         setalertans(true)
         setTimeout(() => {

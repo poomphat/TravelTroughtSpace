@@ -55,7 +55,7 @@ const CurrentPlanet = (props) => {
         onPress={props.planetclicked}
       >
         <Animated.Image
-          style={{ transform: [{ rotate: rotate }],width: '150%',height: '100%'}}
+          style={{ transform: [{ rotate: rotate }],width: 600,height: 600}}
           source={datasystem[props.planetcurrent].picture} //รอทำ data ดาว
         />
       </TouchableOpacity>

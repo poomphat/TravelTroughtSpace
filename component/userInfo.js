@@ -100,7 +100,6 @@ const styles = StyleSheet.create({
     buttonsolar:{
         marginRight: 10,
         marginTop: 10,
-        backgroundColor: '#ffffff22',
         borderRadius: 5,
     }
   });

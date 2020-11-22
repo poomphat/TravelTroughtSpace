@@ -94,11 +94,17 @@ const commentList = (props) => {
     if(loaded){
     return (
         <ImageBackground source={{uri:bg}} style={styles.commentlist} resizeMode="repeat">
+            <TouchableOpacity 
+              onPress={() => props.navigation.goBack()}
+              style={styles.backbutton}>
+              <Ionicons name="ios-arrow-back" size={40} color="white"/>
+            </TouchableOpacity>
             <KeyboardAvoidingView
                 style={styles.commentlist}
                 behavior="padding">
                 <Text style={styles.Title}>Comment</Text>
                 <FlatList
+                    keyExtractor={item => item}
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
                     style={styles.commentall}
@@ -238,6 +244,15 @@ const styles = StyleSheet.create({
         padding: 7,
         backgroundColor: '#021f36',
         borderRadius: 7,
-    }
+    },
+    backbutton:{
+        width: 60,
+        height: 60,
+        position: 'absolute',
+        top: Dimensions.get('window').height*0.06,
+        left: Dimensions.get('window').width*0.05,
+        zIndex: 1,
+        //backgroundColor: 'white'
+      },
 })
 export default commentList;

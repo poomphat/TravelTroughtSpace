@@ -80,6 +80,18 @@ const MyloginPage = (props) => {
                     email,
                     fname,
                     lname,
+                    level:1,
+                    shipList:[true, false, false],
+                    gotAchievement:{
+                        "Earth" : false,
+                        "Jupiter" : false,
+                        "Mars" : false,
+                        "Mercury" : false,
+                        "Neptune" : false,
+                        "Saturn" : false,
+                        "Uranus" : false,
+                        "Venus" : false
+                      }
                 })
                setalertregissuccess(true)
                 setTimeout(() => {
@@ -107,7 +119,7 @@ const MyloginPage = (props) => {
                     console.log('Waitng')
                     props.navigation.navigate('mainScreen',{current: 2})
                     setalertsuccess(false)
-                  }, 2500);
+                  }, 1500);
                 console.log(user.user.email)
                 var userObj = {}
                 const ref = firebase.database().ref('UsersList')
@@ -135,6 +147,7 @@ const MyloginPage = (props) => {
             <View style={{alignItems: 'center'}}>
                  <LottieView
                 autoPlay={true}
+                speed={2}
                 loop={false}
                 style={{
                     width: Dimensions.get('window').width*0.2,
@@ -161,6 +174,7 @@ const MyloginPage = (props) => {
                  <LottieView
                 autoPlay={true}
                 loop={false}
+                speed={2}
                 style={{
                     width: Dimensions.get('window').width*0.2,
                     
@@ -187,6 +201,7 @@ const MyloginPage = (props) => {
                  <LottieView
                 autoPlay={true}
                 loop={false}
+                speed={2}
                 style={{
                     width: Dimensions.get('window').width*0.2,
                     
@@ -213,6 +228,7 @@ const MyloginPage = (props) => {
                  <LottieView
                 autoPlay={true}
                 loop={false}
+                speed={2}
                 style={{
                     width: Dimensions.get('window').width*0.2,
                     
