@@ -1,6 +1,7 @@
 
 import * as firebase from 'firebase';
-import LOGIN from "../actions/storetemp"
+import {LOGIN} from "../actions/storetemp"
+import { useState } from 'react';
 const initialState = {
     user:{},
     img:{
@@ -9,17 +10,53 @@ const initialState = {
     };
 
     const firebaseReducer = (state = initialState, action) => {
+        
         switch (action.type) {
-            /*
             case LOGIN :
-
-                return {...state, favoriteMeals : n}
-            */
+                /*
+                console.log("dogshit")
+                const ref = firebase.database().ref('UsersList')
+                var users = ""
+                ref.orderByChild('email').on("child_added", function(Data){
+                    if(Data.val().email == action.email){
+                        console.log("dogshit-SUCCESS")
+                        users = Data.val();
+                    }
+                })
+                console.log("dogshit-PROCEED")
+                console.log(users)
+                */
+                return {...state, user : action.user}
+            
             default:
-                console.log('alooooo')
                 return state;
         } 
     }
+    /*
+    switch (action.type) {
+        case TOGGLE_FAVORITE :
+            const index = state.favoriteMeals.findIndex(el => (el.id === action.mealId))
+            if (index == -1) {
+                const selectedMeal = MEALS.find((meal) => meal.id == action.mealId)
+                console.log('add')
+                const m = [...state.favoriteMeals]
+                m.push(selectedMeal)
+                return { ...state, favoriteMeals : m };
+            }
+            else if (index >= 0)
+                console.log('delate')
+                
+                const n = [...state.favoriteMeals]
+                n.splice(index)
+                return {...state, favoriteMeals : n}
+        default:
+            console.log('alooooo')
+            return state;
+    } */
 
+
+
+
+    
         
 export default firebaseReducer;

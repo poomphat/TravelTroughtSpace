@@ -1,6 +1,6 @@
 import React, { Component, useState, useRef, useEffect } from "react";
 import { Pages } from "react-native-pages";
-
+import {datasystem} from '../dataSystem/data'
 import {
   StyleSheet,
   Text,
@@ -46,7 +46,6 @@ const CurrentPlanet = (props) => {
       })
     ).start();
   },[])
-  const [currentPlanet, setCurrentPlanet] = useState("earth");
   return (
     <View style={styles.container}>
       {/*<View style={styles.planet}>
@@ -57,7 +56,7 @@ const CurrentPlanet = (props) => {
       >
         <Animated.Image
           style={{ transform: [{ rotate: rotate }],width: '150%',height: '100%'}}
-          source={tempplanetdata[currentPlanet].url} //รอทำ data ดาว
+          source={datasystem[props.planetcurrent].picture} //รอทำ data ดาว
         />
       </TouchableOpacity>
       <Image
@@ -66,13 +65,10 @@ const CurrentPlanet = (props) => {
       />
       <TouchableOpacity
         style={styles.touchSubPlanet}
-        onPress={() =>
-          setCurrentPlanet(tempplanetdata[currentPlanet].subPlanet.name)
-        }
       >
         <Image
           style={styles.subPlanet}
-          source={tempplanetdata[currentPlanet].subPlanet.url} //รอทำ data ดาว
+          source={require("../assets/planet/moon.png")} //รอทำ data ดาว
         />
       </TouchableOpacity>
     </View>

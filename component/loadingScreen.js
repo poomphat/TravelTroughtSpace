@@ -12,6 +12,7 @@ const LoadingScreen = (props) => {
     const [loaded] = useFonts({
         Kanit: require('../assets/fonts/Kanit-Regular.ttf'),
     });
+    
     if (!loaded) {
         return null;
     }
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: 'rgb(0,122,255)'
+        backgroundColor: '#021F36'
     },
     textload: {
         marginTop: 10,

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import UserInfo from "../component/userInfo";
 import CurrentPlanet from "../component/currentPlanet";
 import { StyleSheet, Text, View, Image, Platform, TextInput, Dimensions, ImageBackground, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
@@ -8,7 +8,13 @@ import { FlatList } from 'react-native-gesture-handler';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import * as Animatable from 'react-native-animatable';
+import * as firebase from 'firebase'
+import LoadingScreen from '../component/LoadingScreen';
+import { useSelector, useDispatch } from "react-redux";
+import {datasystem} from '../dataSystem/data'
 
+
+/*
 const data = [
     {
         Author: 'MheekungZa',
@@ -39,14 +45,42 @@ const data = [
         Detail: 'กระเป๋าวิเศษษษษษษษษ'
     },
 ]
+*/
 
 const commentList = (props) => {
-
-
+    const flat = useRef()
+    const [text,settext] = useState('')
+    const [data,setdata] = useState([])
+    const [hidden,sethidden] = useState(0)
+    const [loaded,setloaded] = useState(false)
+    const bg = useSelector( (state) => state.img.background );
+    const user = useSelector( (state) => state.user );
+    useEffect (() => {
+        const ref = firebase.database().ref('Comment/'+datasystem[props.navigation.getParam("planet")].title)
+        const list = data
+        ref.on("child_added", function(Data){
+                list.push(Data.val())
+        })
+        setdata(list)
+        setTimeout(() => {
+             setloaded(true)
+        }, 1000);
+      },[])
+      
+    const sendComment = () =>{
+        console.log(text)
+        const ref = firebase.database().ref('Comment/'+datasystem[props.navigation.getParam("planet")].title)
+        firebase.database().ref('Comment/'+datasystem[props.navigation.getParam("planet")].title).push({
+            Author: user.fname,
+            Detail: text
+        })
+        sethidden(hidden+1);
+        console.log('send')
+    }
 
     const renderItem = ({ item, index }) => {
         return (
-            <Animatable.View style={styles.box} key={item.Author} animation="zoomIn" delay={50*index} duration={500}>
+            <View style={styles.box} key={item.Author}>
                 <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                     <Image
                         style={styles.profilePic}
@@ -55,10 +89,11 @@ const commentList = (props) => {
                     <Text style={styles.textTitle}>{item.Author}</Text>
                 </View>
                 <Text style={styles.Detail}>{item.Detail}</Text>
-            </Animatable.View>);
+            </View>);
     };
+    if(loaded){
     return (
-        <ImageBackground source={require('../assets/bg.png')} style={styles.commentlist} resizeMode="repeat">
+        <ImageBackground source={{uri:bg}} style={styles.commentlist} resizeMode="repeat">
             <KeyboardAvoidingView
                 style={styles.commentlist}
                 behavior="padding">
@@ -70,7 +105,50 @@ const commentList = (props) => {
                     renderItem={renderItem}
                     data={data}
                     keyExtractor={item => item.id}
-                    inverted={false}/>
+                    inverted={false}
+                    ref={flat}
+                    onContentSizeChange={() =>{
+                        flat.current.scrollToEnd({animation: true});
+                    }}
+                    />
+                <View style={styles.TextBox}>
+                    <TextInput
+                        placeholder={'Comment'}
+                        placeholderTextColor="#ccc"
+                        color='white'
+                        fontWeight='bold'
+                        style={styles.Textinput}
+                        onChangeText={(text) => {settext(text)}}
+                        autoCapitalize="none"
+                    />
+                    <TouchableOpacity style={styles.Send}
+                    onPress={() => {
+                        sendComment();
+                    }}>
+                        <Ionicons name="md-send" size={24} color="white" />
+                    </TouchableOpacity>
+                </View>
+            </KeyboardAvoidingView>
+        </ImageBackground>
+    );}
+    else{
+        return(
+            <ImageBackground source={{uri:bg}} style={styles.commentlist} resizeMode="repeat">
+            <KeyboardAvoidingView
+                style={styles.commentlist}
+                behavior="padding">
+                <Text style={styles.Title}>Comment</Text>
+                <FlatList
+                    keyExtractor={item => item.id}
+                    showsHorizontalScrollIndicator={false}
+                    showsVerticalScrollIndicator={false}
+                    style={styles.commentall}
+                    renderItem={renderItem}
+                    data={[]}
+                    keyExtractor={item => item.id}
+                    inverted={true}
+                    ref={flat}
+                    />
                 <View style={styles.TextBox}>
                     <TextInput
                         placeholder={'Comment'}
@@ -79,6 +157,7 @@ const commentList = (props) => {
                         fontWeight='bold'
                         style={styles.Textinput}
                         autoCapitalize="none"
+                        onChangeText={(text) => settext(text.value)}
                     />
                     <TouchableOpacity style={styles.Send}>
                         <Ionicons name="md-send" size={24} color="white" />
@@ -86,20 +165,21 @@ const commentList = (props) => {
                 </View>
             </KeyboardAvoidingView>
         </ImageBackground>
-    );
+        )
+    }
 }
 const styles = StyleSheet.create({
     box: {
-        padding: 20,
+        paddingVertical: 15,
+        paddingHorizontal:30,
         width: Dimensions.get('window').width * 0.9,
-        height: Dimensions.get('window').height * 0.13,
         backgroundColor: 'grey',
         marginVertical: Dimensions.get('window').height * 0.01,
         backgroundColor: '#1f4068',
         borderRadius: 20,
     },
     commentall: {
-        height: Dimensions.get('window').height * 0.8,
+        height: Dimensions.get('window').height * 0.85,
     },
     commentlist: {
         justifyContent: 'center',
@@ -156,7 +236,7 @@ const styles = StyleSheet.create({
         marginTop: Dimensions.get('window').height * 0.02,
         height: 40,
         padding: 7,
-        //backgroundColor: '#021f36',
+        backgroundColor: '#021f36',
         borderRadius: 7,
     }
 })

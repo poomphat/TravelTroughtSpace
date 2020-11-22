@@ -1,33 +1,31 @@
 import React, { useRef, useState } from 'react';
 import UserInfo from "../component/userInfo";
 import CurrentPlanet from "../component/currentPlanet";
-import { StyleSheet, Text, View, Image, Platform, Button, Dimensions, ImageBackground, Animated, Easing } from 'react-native';
+import { StyleSheet, Text, View, Image, Platform, Button, Dimensions, ImageBackground, Animated, Easing,TouchableOpacity } from 'react-native';
 import Carousel from 'react-native-snap-carousel';
 import { FontDisplay } from 'expo-font';
+import {datasystem} from '../dataSystem/data'
+import { useSelector, useDispatch } from "react-redux";
+
 
 const data = [1, 2, 3, 4, 5, 6, 7, 8]
 const dataEarth = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune']
 
 const solarSystemScreen = (props) => {
-    const [current, setcurrent] = useState(0)
-    const movebg = useRef(new Animated.Value(0)).current;
-    const move = movebg.interpolate({
-        inputRange: [0,1],
-        outputRange: [0,Dimensions.get('window').width]
-    });
+    const bg = useSelector( (state) => state.img.background );
 
     const carouselRef = useRef('')
-    const [indexmain, setindexmain] = useState(0)
+    const [indexmain, setindexmain] = useState(props.navigation.getParam("currentPos"))
 
-
+    console.log(props.navigation.getParam("currentPos"))
 
     const renderItem = ({ item, index }) => {
+        
         return (
             <View style={styles.box}>
-                <Text>{item}</Text>
                 <Image
                     style={styles.star}
-                    source={require("../assets/planet/earth.png")}
+                    source={datasystem[index].picture}
                     resizeMode="cover"
                 />
             </View>);
@@ -62,7 +60,7 @@ const solarSystemScreen = (props) => {
             alignItems: 'center',
             justifyContent: "center",}}>
         
-        <Animated.Image source={require('../assets/bg.png')} style={{ 
+        <Animated.Image source={{uri : bg}} style={{ 
             position: 'absolute',
             width:Dimensions.get('window').width,
             height:Dimensions.get('window').height,
@@ -76,13 +74,21 @@ const solarSystemScreen = (props) => {
                     data={data}
                     style={styles.Carousel}
                     renderItem={renderItem}
+                    firstItem={props.navigation.getParam("currentPos")}
+                    scrollToIndex={props.navigation.getParam("currentPos")}
                     sliderWidth={Dimensions.get('window').width}
                     itemWidth={Dimensions.get('window').width}
                     onSnapToItem={(index) => setindexmain(index)}
                 />
             </View>
             <View style={styles.boxdetail}>
-                <Text style={{ fontSize: 36 }}>{dataEarth[indexmain]}</Text>
+                <Text style={{ fontSize: 36 }}>{datasystem[indexmain].title}</Text>
+                <TouchableOpacity style={styles.gotravelbutton}
+                onPress={() => {
+                    props.navigation.navigate("mainScreen",{current: indexmain})
+                }}>
+                <Text style={{color:'white', fontSize:20,fontWeight: 'bold'}}>Travel!!</Text>
+                </TouchableOpacity>
             </View>
         
         </View>
@@ -111,6 +117,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
 
-    }
+    },
+    gotravelbutton:{
+        marginTop: 20,
+        backgroundColor: 'rgb(48,209,88)',
+        width: Dimensions.get('window').width*0.8,
+        height: 60,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 7,
+    },
 })
 export default solarSystemScreen;

@@ -6,6 +6,7 @@ import FirebastInit from "../firebase/FirebaseInit"
 import LottieView from 'lottie-react-native';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import { useSelector, useDispatch } from "react-redux";
+import { loginStoreUser } from '../store/actions/storetemp'
 
 /*
 const firebaseConfig = {
@@ -87,6 +88,7 @@ const MyloginPage = (props) => {
                 setTimeout(() => {
                     setLoginState('Travel Trought Space')
                 }, 3000);
+                //useDispatch()
              }).catch(error =>{
                 console.log(error.toString())
                 setalertregisfailed(true)
@@ -95,6 +97,7 @@ const MyloginPage = (props) => {
             
         //}
     }
+    const dispatch = useDispatch();
     const loginUser = (email, password) => {
 
         //try {
@@ -102,17 +105,24 @@ const MyloginPage = (props) => {
                 setalertsuccess(true)
                 setTimeout(() => {
                     console.log('Waitng')
-                    props.navigation.navigate('mainScreen')
+                    props.navigation.navigate('mainScreen',{current: 2})
                     setalertsuccess(false)
                   }, 2500);
                 console.log(user.user.email)
+                var userObj = {}
+                const ref = firebase.database().ref('UsersList')
+                ref.orderByChild('email').on("child_added", function(Data){
+                    if(Data.val().email == user.user.email){
+                        userObj = Data.val();
+                        dispatch(loginStoreUser(userObj))
+                    }
+                })
                 console.log('finishlogin')
             
             }).catch(error => {
                 console.log('error ' , error)
                 setalertfailed(true)
             })
-            
         //}
         /*
         catch (error) {

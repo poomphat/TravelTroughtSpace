@@ -7,22 +7,34 @@ import { FontAwesome, AntDesign,Entypo } from '@expo/vector-icons';
 import * as Animatable from 'react-native-animatable';
 import LoadingScreen from "../component/LoadingScreen";
 import { Assets } from 'react-navigation-stack';
-
+import { useSelector, useDispatch } from "react-redux";
+import {datasystem} from '../dataSystem/data'
 const MainScreen = (props) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [imgLoaded, setImgLoaded] = useState(false);
-
+    const [current,setcurrent] = useState(props.navigation.getParam("current"))
+    //bg
+    const bg = useSelector( (state) => state.img.background );
+    useEffect(() => {
+        setcurrent(props.navigation.getParam("current"))
+    })
+    const gotoSolar = (current) =>{
+        props.navigation.navigate("solarSystem", {currentPos:current})
+    }
     return(
-        <ImageBackground source={require('../assets/bg.png')} style={styles.container} resizeMode="repeat" onload={() => {setImgLoaded(1)}}>
+        <ImageBackground source={{uri:bg}} style={styles.container} resizeMode="repeat">
                     <View>
                         <UserInfo
-                            Gotoprofile={() => { props.navigation.navigate("profile") }} />
+                            gotoprofile={() => { props.navigation.navigate("profile") }}
+                            gotoSolar={() => gotoSolar(current)}
+                             />
                         <CurrentPlanet
                             planetclicked={() => {
                                 setModalVisible(true);
                             }
                             }
                             onSolarClicked={() => { props.navigation.navigate("solarSystem") }}
+                            planetcurrent={props.navigation.getParam("current")}
                         />
                         <Modal
                             animationType="slide"
@@ -30,7 +42,7 @@ const MainScreen = (props) => {
                             visible={modalVisible}>
                             <View style={styles.centeredView}>
                                 <View style={styles.modalView}>
-                                    <Text style={styles.modalText}>Earth</Text>
+                                    <Text style={styles.modalText}>{datasystem[props.navigation.getParam("current")].title}</Text>
                                     <View style={styles.closebuttonView}>
                                         <TouchableOpacity
                                             onPress={() => {
@@ -50,13 +62,13 @@ const MainScreen = (props) => {
                                         <TouchableOpacity style={styles.buttonQ}
                                         onPress={() => {
                                             setModalVisible(!modalVisible);
-                                            props.navigation.navigate("quiz",{planet:0})}}>
+                                            props.navigation.navigate("quiz",{planet: props.navigation.getParam("current")})}}>
                                             <AntDesign name="form" size={40} color="white" /><Text style={{fontWeight: 'bold',color: 'white'}}> Quiz</Text>
                                         </TouchableOpacity>
                                         <TouchableOpacity style={styles.buttonC}
                                             onPress={() => {
                                                 setModalVisible(!modalVisible);
-                                                props.navigation.navigate("comment")}}>
+                                                props.navigation.navigate("comment",{planet: props.navigation.getParam("current")})}}>
                                             <FontAwesome name="comments" size={40} color="white" /><Text style={{fontWeight: 'bold',color: 'white'}}>Comment</Text>
                                         </TouchableOpacity>
                                     </Animatable.View>
@@ -156,6 +168,6 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         alignItems: 'center',
 
-    }
+    },
 })
 export default MainScreen;

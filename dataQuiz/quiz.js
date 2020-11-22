@@ -1,4 +1,54 @@
 export const quiznaja = [
+    {
+        title: 'Mercury',
+        quizplan : [{
+            color : 'rgb(10,132,255)',
+            question: 'หิวข้าวมั้ย',
+            choice : [
+                'ลำดับที่ 1',
+                'ลำดับที่ 3',
+                'ลำดับที่ 4',
+                'ลำดับที่ 6',
+            ],
+            rightchoice : 2
+        },
+        {
+            color : 'rgb(48,209,88)',
+            question: 'หิวข้าวมั้ย',
+            choice : [
+                'หิว',
+                'หิว',
+                'หิว',
+                'หิวแต่ข้อ4',
+            ],
+            rightchoice : 1
+        },]
+    },
+    {
+        title: 'Venus',
+        quizplan : [{
+            color : 'rgb(10,132,255)',
+            question: 'หิวข้าวมั้ย',
+            choice : [
+                'ลำดับที่ 1',
+                'ลำดับที่ 3',
+                'ลำดับที่ 4',
+                'ลำดับที่ 6',
+            ],
+            rightchoice : 2
+        },
+        {
+            color : 'rgb(48,209,88)',
+            question: 'หิวข้าวมั้ย',
+            choice : [
+                'หิว',
+                'หิว',
+                'หิว',
+                'หิวแต่ข้อ4',
+            ],
+            rightchoice : 1
+        },]
+    },
         {
             title: 'Earth',
             quizplan : [{
@@ -36,10 +86,10 @@ export const quiznaja = [
             },]
     },
     {
-        title: 'mar',
+        title: 'mars',
         quizplan : [{
             color : 'rgb(10,132,255)',
-            question: 'ลำดับของดาวโลกในระบบสุริยจักรวาลคือลำดับที่เท่าไหร่',
+            question: 'ลำดับของดาวอังคารในระบบสุริยจักรวาลคือลำดับที่เท่าไหร่',
             choice : [
                 'ลำดับที่ 1',
                 'ลำดับที่ 3',
@@ -50,39 +100,15 @@ export const quiznaja = [
         },
         {
             color : 'rgb(48,209,88)',
-            question: 'โลกหมุนรอบตัวเองใช้เวลาเท่าใด',
+            question: 'ดาวอังคารหมุนรอบตัวเองใช้เวลาเท่าใด',
             choice : [
                 '23 ชั่วโมง 56 นาที',
                 '24 ชั่วโมง',
-                '1 ปี',
+                'ลืม',
                 '31 วัน',
             ],
-            rightchoice : 1
+            rightchoice : 2
         },]
 },
-{
-    title: 'test',
-    quizplan : [{
-        color : 'rgb(10,132,255)',
-        question: 'หิวข้าวมั้ย',
-        choice : [
-            'ลำดับที่ 1',
-            'ลำดับที่ 3',
-            'ลำดับที่ 4',
-            'ลำดับที่ 6',
-        ],
-        rightchoice : 2
-    },
-    {
-        color : 'rgb(48,209,88)',
-        question: 'หิวข้าวมั้ย',
-        choice : [
-            'หิว',
-            'หิว',
-            'หิว',
-            'หิวแต่ข้อ4',
-        ],
-        rightchoice : 1
-    },]
-},
+
 ]

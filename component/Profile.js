@@ -6,11 +6,13 @@ import Carousel from 'react-native-snap-carousel';
 import * as Animatable from 'react-native-animatable';
 import ProgressBar from 'react-native-progress/Bar';
 import { FontAwesome,Ionicons } from '@expo/vector-icons';
+import { useSelector, useDispatch } from "react-redux";
 
 const data = [1, 2, 3]
 
 const Profile = (props) => {
   const carouselRef = useRef('')
+  const user = useSelector( (state) => state.user );
   const renderItem = ({ item, index }) => {
     return (
         <View style={styles.box}>
@@ -33,13 +35,13 @@ const Profile = (props) => {
             style={styles.profilePic}
             source={require("../assets/mheeIconTest.png")} //รอแก้จาก UserDB
           />
-        <Text style={styles.textTitle}>Towa Tenshi</Text>
+        <Text style={styles.textTitle}>{user.fname}</Text>
         </Animatable.View>
         <View style={styles.detail}>
         <Animatable.View style={styles.box} animation="fadeInUp"  delay={200}>
           <View style={styles.DetailBox}>
-            <Text style={{ fontSize: 15 ,color: 'white',fontWeight: 'bold' }}>Name: Towa Tenshi</Text>
-            <Text style={{ fontSize: 15,color: 'white',fontWeight: 'bold' }}>Age: xxx</Text>
+            <Text style={{ fontSize: 15 ,color: 'white',fontWeight: 'bold' }}>Name: {user.fname} {user.lname}</Text>
+            <Text style={{ fontSize: 15,color: 'white',fontWeight: 'bold' }}>Email: {user.email}</Text>
             <Text style={{ fontSize: 15,color: 'white',fontWeight: 'bold' }}>Kawaii</Text>
           </View>
         </Animatable.View>

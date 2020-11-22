@@ -3,6 +3,7 @@
 
 export const LOGIN = "LOGIN";
 
-export const toggleFavorite = (useremail) => {
-    return { type: LOGIN, email: useremail };
+export const loginStoreUser = (userObj) => {
+    //console.log("THATDOG"+ useremail)
+    return { type: LOGIN, user: userObj };
    };
