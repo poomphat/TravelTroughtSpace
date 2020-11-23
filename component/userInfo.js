@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import { Pages } from 'react-native-pages';
 import { StyleSheet, Text, View, Image, Platform, Button } from 'react-native';
 import LottieView from 'lottie-react-native';
@@ -9,6 +9,7 @@ import ProgressBar from 'react-native-progress/Bar'
 import Constants from 'expo-constants'; 
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useSelector, useDispatch } from "react-redux";
+import { profilePic } from "../dataSystem/data"
 
 
 
@@ -16,17 +17,19 @@ import { useSelector, useDispatch } from "react-redux";
 const UserInfo = (props) =>{
     const [exp, setExp] = useState(0.7);
     const user = useSelector( (state) => state.user );
+  
     console.log(user)
     return(
         <View style={styles.infoBox}>
             <View style={{width: 200}}>
-                
+            
             <TouchableOpacity
                 style={styles.Gopro}
                 onPress={props.gotoprofile}>
-            <View style={{flexDirection: 'row'}}><Image
+            <View style={{flexDirection: 'row'}}>
+                <Image
                 style={styles.profilePic}
-                source={require("../assets/mheeIconTest.png")} //รอแก้จาก UserDB
+                source={profilePic[user.Profile].pic} //รอแก้จาก UserDB
             />
               <Text style={styles.profileName_text}>{user.fname}</Text></View>
             </TouchableOpacity>

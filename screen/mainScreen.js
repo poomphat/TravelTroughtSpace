@@ -13,16 +13,20 @@ const MainScreen = (props) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [imgLoaded, setImgLoaded] = useState(false);
     const [current,setcurrent] = useState(props.navigation.getParam("current"))
+    const [p,setp] = useState(0)
+    
     //bg
     const bg = useSelector( (state) => state.img.background );
     useEffect(() => {
         setcurrent(props.navigation.getParam("current"))
-    })
+        setp(p+1)
+    },[])
     const gotoSolar = (current) =>{
         props.navigation.navigate("solarSystem", {currentPos:current})
     }
     return(
         <ImageBackground source={{uri:bg}} style={styles.container} resizeMode="repeat">
+            <Text style={{display: 'none'}}>{p}</Text>
                     <View>
                         <UserInfo
                             gotoprofile={() => { props.navigation.navigate("profile") }}

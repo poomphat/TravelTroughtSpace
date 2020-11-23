@@ -82,6 +82,7 @@ const MyloginPage = (props) => {
                     lname,
                     level:1,
                     shipList:[true, false, false],
+                    Profile:0,
                     gotAchievement:{
                         "Earth" : false,
                         "Jupiter" : false,

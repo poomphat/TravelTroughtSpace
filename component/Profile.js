@@ -9,8 +9,8 @@ import { FontAwesome, Ionicons } from '@expo/vector-icons';
 import { useSelector, useDispatch } from "react-redux";
 import AwesomeAlert from 'react-native-awesome-alerts';
 import LottieView from 'lottie-react-native';
-import { changeShip } from "../store/actions/storetemp"
-import { datasystem } from "../dataSystem/data"
+import { changeShip,changePic } from "../store/actions/storetemp"
+import { datasystem,profilePic } from "../dataSystem/data"
 import * as firebase from 'firebase';
 import { ScrollView } from 'react-native-gesture-handler';
 const data = [{
@@ -22,22 +22,55 @@ const data = [{
 }]
 
 const Profile = (props) => {
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalchange ,setmodalchange] = useState(false);
   const [dataach, setdataach] = useState(currentShip)
-  
-  const bg = useSelector( (state) => state.img.background );
-  const currentShip = useSelector((state) => state.user.CurrentShip);
   const [indexmain, setindexmain] = useState(currentShip)
   const [alertcantchange, setalertcantchange] = useState(false)
   const [alertcantchangecan, setalertcantchangecan] = useState(false)
+  const [p, setp] = useState(0)
   const carouselRef = useRef('')
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+  const [datas,setdatas] = useState()
+  const [load, setLoad] = useState(false)
+  const [progressArch, setProgressArch] = useState(0.0)
+  const [fcount, setfCount] = useState(0)
+
+
+  const bg = useSelector( (state) => state.img.background );
+  const currentShip = useSelector((state) => state.user.CurrentShip);
+
+  
+  useEffect(() => {
+    var count = 0
+    for (var key in user['gotAchievement']) {
+      if (user['gotAchievement'].hasOwnProperty(key)) {
+        if (user['gotAchievement'][key]) {
+          count += 1
+        }
+      }
+    }
+    //setProgressArch(count)
+    
+    //console.log(count + ' Count')
+    //console.log(parseFloat(Object.keys(user['gotAchievement']).length) + " all")
+    const progress = parseFloat(count) / parseFloat(Object.keys(user['gotAchievement']).length)
+    //console.log(progress)
+    setfCount(fcount)
+    setProgressArch(progress)
+    //console.log("setProgressArch " +progressArch)
+  }, [])
+  
+  /*
   const achive = {}
     const ref = firebase.database().ref('Achievement')
     ref.on("child_added", function(Data){
       achive[Data.key] = Data.val()
-      })
+      })*/
+  const achive = useSelector( (state) => state.achive);
+  //console.log(achive)
+
 
   const renderItem = ({ item, index }) => {
     return (
@@ -48,24 +81,24 @@ const Profile = (props) => {
         />
       </View>);
   };
+
+
+  const changepic = (index) => {
+    dispatch(changePic(index))
+    setp(p+1);
+  }
+
   const changeship = () => {
-    var count = 0
-    for (var key in user['gotAchievement']) {
-      if (user['gotAchievement'].hasOwnProperty(key)) {
-        if (user['gotAchievement'][key]) {
-          count += 1
-        }
-      }
-    }
+    //console.log(user['gotAchievement'].length)
     if (indexmain == 2) {
-      if (count >= 6) {
+      if (user['shipList'][2]) {
         dispatch(changeShip(indexmain))
         setalertcantchangecan(true)
       } else
         setalertcantchange(true)
     }
     else if (indexmain == 1) {
-      if (count >= 3) {
+      if (user['shipList'][1]) {
         dispatch(changeShip(indexmain))
         setalertcantchangecan(true)
       } else
@@ -130,7 +163,7 @@ const Profile = (props) => {
     )
   }
   return (
-    <ImageBackground source={{uri: bg}} style={styles.container} resizeMode="repeat">
+    <ImageBackground source={{uri : bg}} style={styles.container} resizeMode="repeat">
       <View>
         <TouchableOpacity
           onPress={() => props.navigation.goBack()}
@@ -138,10 +171,11 @@ const Profile = (props) => {
           <Ionicons name="ios-arrow-back" size={40} color="white" />
         </TouchableOpacity>
         <Animatable.View style={styles.Bgprofile} animation="fadeInDown" delay={0}>
+          <TouchableOpacity onPress={() => {setmodalchange(true)}}>
           <Image
             style={styles.profilePic}
-            source={require("../assets/mheeIconTest.png")} //รอแก้จาก UserDB
-          />
+            source={profilePic[user.Profile]['pic']} //รอแก้จาก UserDB
+          /></TouchableOpacity>
           <Text style={styles.textTitle}>{user.fname}</Text>
         </Animatable.View>
         <View style={styles.detail}>
@@ -177,7 +211,8 @@ const Profile = (props) => {
                   loop={true}
                   firstItem={currentShip}
                   loopClonesPerSide={5}
-                  onSnapToItem={(index) => { setindexmain(index); console.log(index) }}
+                  inactiveSlideScale={0.5}
+                  onSnapToItem={(index) => { setindexmain(index)}}
                 />
               </View>
 
@@ -198,9 +233,9 @@ const Profile = (props) => {
                 fontSize: 15, color: 'white', fontWeight: 'bold'
                 , marginTop: Dimensions.get('window').height * 0.01
                 , marginBottom: Dimensions.get('window').height * 0.015
-              }}>Progess : 48%</Text>
+              }}>Progess : {progressArch  *100}%</Text>
               <ProgressBar
-                progress={0.48}
+                progress={progressArch}
                 width={Dimensions.get('window').width * 0.8}
                 height={20}
                 animated={true}
@@ -253,11 +288,45 @@ const Profile = (props) => {
                         source={item.picture} //รอแก้จาก UserDB
                     />
                     <View style={{justifyContent: 'center',marginLeft: 20,}}>
-                  <Text style={{fontWeight: 'bold',width: Dimensions.get('window').width*0.30,color:'white'}}>{achive[item.title].name}</Text>
+                    <Text style={{fontWeight: 'bold',width: Dimensions.get('window').width*0.30,color:'white'}}>{achive[item.title]['name']}</Text>
                     </View>
                     </View>
                   )
                 })}</ScrollView>
+            </View>
+          </View>
+        </Modal>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalchange}>
+          <View style={styles.centeredView}>
+            <View style={styles.modalView2}>
+              <Text style={{color: 'white', fontSize: 26,margin:10,fontWeight: 'bold'}}>Pick what you like!!</Text>
+              <View style={styles.closebuttonView}>
+                <TouchableOpacity
+                  onPress={() => {
+                    setmodalchange(!modalchange);
+                  }}
+                ><FontAwesome name="close" size={30} color="white" />
+                </TouchableOpacity></View>
+                <View style={{ flexDirection: 'row',alignItems: 'center',justifyContent: 'center'}}>
+                {profilePic.map((item,index)=>{
+
+                  return(
+                    <View key={index} style={{margin: 10}}>
+                      <TouchableOpacity 
+                        onPress={() => {changepic(index)}}>
+                      <Image
+                        style={{width: Dimensions.get('window').width*0.23,height:Dimensions.get('window').height*0.12,borderRadius: 10,}}
+                        source={item.pic}
+                    />
+                    <Text style={{display: 'none'}}>{p}</Text>
+                    </TouchableOpacity>
+              
+                    </View>
+                  )
+                })}</View>
             </View>
           </View>
         </Modal>
@@ -444,6 +513,23 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5
+},
+modalView2: {
+  width: Dimensions.get('window').width * 0.9,
+  height: Dimensions.get('window').height * 0.25,
+  margin: 20,
+  backgroundColor: "rgb(48,209,88)",
+  borderRadius: 20,
+  padding: 20,
+
+  shadowColor: "#000",
+  shadowOffset: {
+      width: 0,
+      height: 2
+  },
+  shadowOpacity: 0.25,
+  shadowRadius: 3.84,
+  elevation: 5
 },
 openButton: {
     backgroundColor: "#F194FF",

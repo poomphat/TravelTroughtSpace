@@ -8,6 +8,7 @@ import {datasystem} from '../dataSystem/data'
 import { useSelector, useDispatch } from "react-redux";
 import { Ionicons } from '@expo/vector-icons';
 import AwesomeAlert from 'react-native-awesome-alerts';
+//https://www.npmjs.com/package/react-native-image-filter
 import {
     Grayscale,
   } from 'react-native-color-matrix-image-filters'
@@ -49,7 +50,7 @@ const solarSystemScreen = (props) => {
             return(
                 <View style={styles.box}>
                     <Image
-                        style={styles.starBlack}
+                        style={[styles.star, {tintColor: '#000000aa'}]}//STAR BUT NOT STAR BUT BLACK STAR
                         source={datasystem[index].picture}
                         resizeMode="cover"
                     />
@@ -101,7 +102,7 @@ const solarSystemScreen = (props) => {
         <View style={{flex: 1,
             alignItems: 'center',
             justifyContent: "center",}}>
-       {backbutton}
+            {backbutton}
         <Animated.Image source={{uri : bg}} style={{ 
             position: 'absolute',
             width:Dimensions.get('window').width,

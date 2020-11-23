@@ -26,3 +26,26 @@ export const datasystem = [
         picture : require('../assets/planet/neptune.png'),
     },
 ]
+
+export const profilePic =[
+    {
+        pic : require('../assets/level1.jpg')
+    },
+    {
+        pic : require('../assets/level2.jpg')
+    },
+    {
+        pic: require('../assets/level3.jpg')
+    },
+]
+export const spaceShip =[
+    {
+        pic : require('../assets/spaceship/ship1.png')
+    },
+    {
+        pic : require('../assets/spaceship/ship2.png')
+    },
+    {
+        pic: require('../assets/spaceship/ship3.png')
+    },
+]
