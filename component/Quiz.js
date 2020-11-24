@@ -30,7 +30,7 @@ const Quiz = (props) => {
     const [countDown,setcountDown] = useState(3)
 
     const dispatch = useDispatch();
-    const backbutton = () => {
+    const Backbutton = () => {
         return (
             <TouchableOpacity
                 onPress={() => props.navigation.goBack()}
@@ -126,7 +126,7 @@ const Quiz = (props) => {
         return (
             <View style={{ flex: 1, backgroundColor: '#1f4068' }}>
                 <View style={{ flexDirection: 'row', justifyContent: 'space-between', marginBottom: Dimensions.get('window').height * 0.01, paddingHorizontal: 20, marginTop: Dimensions.get('window').height * 0.05, }}>
-                    {backbutton()}
+                    <Backbutton/>
                     <View style={styles.titile}>
                         <Text style={{ color: 'white', fontSize: 28, fontWeight: 'bold' }}>
                             Quiz

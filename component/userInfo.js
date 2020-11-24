@@ -19,15 +19,28 @@ import { withNavigation } from 'react-navigation';
 const UserInfo = (props) =>{
     const [exp, setExp] = useState(0.7);
     const [user, setUser] = useState({});
+    const [progressArch, setProgressArch] = useState(0.0)
+    const [fcount, setfCount] = useState(0)
     //const [userload, setUserload] = useState(false)
 
     //const isFocused = useIsFocused();
-    /*
+    const userTemp = useSelector( (state) => state.user );
     useEffect(() =>{
-        //const userTemp = useSelector( (state) => state.user );
         setUser(userTemp)
-        setUserload(true)
-    }, [userTemp])*/
+
+        var count = 0
+        for (var key in userTemp['gotAchievement']) {
+        if (userTemp['gotAchievement'].hasOwnProperty(key)) {
+            if (userTemp['gotAchievement'][key]) {
+            count += 1
+            }
+        }
+        }
+        const progress = parseFloat(count) / parseFloat(Object.keys(userTemp['gotAchievement']).length)
+        setfCount(fcount)
+        setProgressArch(progress)
+        //setUserload(true)
+    }, [])
     /*
     useEffect(() =>{
         console.log('userInfo FOCUS!!!!!')
@@ -50,7 +63,7 @@ const UserInfo = (props) =>{
             </TouchableOpacity>
             <View style={styles.ProgressBar}>
                 <ProgressBar
-                    progress={exp} 
+                    progress={progressArch} 
                     width={200}
                     height={15}
                     animated={true}

@@ -22,7 +22,7 @@ const dataEarth = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Ur
 const solarSystemScreen = (props) => {
     const bg = useSelector( (state) => state.img.background );
     const currentShip = useSelector( (state) => state.user.CurrentShip);
-    const backbutton = () => {
+    const Backbutton = () => {
         return(
             <TouchableOpacity 
               onPress={() => props.navigation.goBack()}
@@ -106,7 +106,7 @@ const solarSystemScreen = (props) => {
         <View style={{flex: 1,
             alignItems: 'center',
             justifyContent: "center",backgroundColor: '#1f4068'}}>
-            {backbutton}
+            <Backbutton/>
         <ImageBackground source={{uri : bg}} style={{ 
             position: 'absolute',
             width: '100%',

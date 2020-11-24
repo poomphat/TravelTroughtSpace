@@ -147,7 +147,7 @@ const commentList = (props) => {
                 behavior="padding">
                 <Text style={styles.Title}>Comment</Text>
                 <FlatList
-                    keyExtractor={item => item.id}
+                    keyExtractor={item => item.id+"1"}
                     showsHorizontalScrollIndicator={false}
                     showsVerticalScrollIndicator={false}
                     style={styles.commentall}
