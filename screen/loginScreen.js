@@ -92,7 +92,8 @@ const MyloginPage = (props) => {
                         "Saturn" : false,
                         "Uranus" : false,
                         "Venus" : false
-                      }
+                      },
+                    current:2,
                 })
                setalertregissuccess(true)
                 setTimeout(() => {
@@ -116,11 +117,6 @@ const MyloginPage = (props) => {
         //try {
             firebase.auth().signInWithEmailAndPassword(email, password).then(function (user) {
                 setalertsuccess(true)
-                setTimeout(() => {
-                    console.log('Waitng')
-                    props.navigation.navigate('mainScreen',{current: 2})
-                    setalertsuccess(false)
-                  }, 1500);
                 console.log(user.user.email)
                 var userObj = {}
                 const ref = firebase.database().ref('UsersList')
@@ -130,6 +126,11 @@ const MyloginPage = (props) => {
                         dispatch(loginStoreUser(userObj))
                     }
                 })
+                setTimeout(() => {
+                    console.log('Waitng')
+                    props.navigation.navigate('mainScreen', {current:userObj.current})
+                    setalertsuccess(false)
+                  }, 1500);
                 console.log('finishlogin')
             
             }).catch(error => {

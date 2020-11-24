@@ -8,7 +8,7 @@ import * as Animatable from 'react-native-animatable';
 import LoadingScreen from "../component/LoadingScreen";
 import { Assets } from 'react-navigation-stack';
 import { useSelector, useDispatch } from "react-redux";
-import {datasystem} from '../dataSystem/data'
+import {datasystem, spaceShip} from '../dataSystem/data'
 const MainScreen = (props) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [imgLoaded, setImgLoaded] = useState(false);
@@ -17,10 +17,13 @@ const MainScreen = (props) => {
     
     //bg
     const bg = useSelector( (state) => state.img.background );
+    const user = useSelector( (state) => state.img.background );
+    const currentShip = useSelector( (state) => state.user.CurrentShip );
+    const userTemp = useSelector( (state) => state.user );
     useEffect(() => {
         setcurrent(props.navigation.getParam("current"))
-        setp(p+1)
-    },[])
+        
+    })
     const gotoSolar = (current) =>{
         props.navigation.navigate("solarSystem", {currentPos:current})
     }
@@ -32,6 +35,7 @@ const MainScreen = (props) => {
                         <UserInfo
                             gotoprofile={() => { props.navigation.navigate("profile") }}
                             gotoSolar={() => gotoSolar(current)}
+                            userPic={userTemp.Profile}
                              />
                         <CurrentPlanet
                             planetclicked={() => {
@@ -40,6 +44,7 @@ const MainScreen = (props) => {
                             }
                             onSolarClicked={() => { props.navigation.navigate("solarSystem") }}
                             planetcurrent={props.navigation.getParam("current")}
+                            spaceShipCurrent={currentShip}
                         />
                         <Modal
                             animationType="slide"
@@ -59,7 +64,7 @@ const MainScreen = (props) => {
                                         <TouchableOpacity style={styles.buttonW}
                                                             onPress={() => {
                                                                 setModalVisible(!modalVisible);
-                                                                props.navigation.navigate("planetInfo")}}>
+                                                                props.navigation.navigate(datasystem[props.navigation.getParam("current")].title, {planet: props.navigation.getParam("current")})}}>
                                         <Entypo name="magnifying-glass" size={40} color="white" /><Text style={{fontWeight: 'bold',color: 'white'}}> Discover </Text>
                                         </TouchableOpacity>
                                         </Animatable.View>

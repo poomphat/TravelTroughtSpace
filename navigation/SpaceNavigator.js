@@ -8,19 +8,37 @@ import MyloginPage from "../screen/loginScreen";
 import solarSystemScreen from "../screen/solarsystemScreen";
 import CommentList from "../component/commentList";
 import Quiz from "../component/Quiz";
+import Earth from "../planetPages/Earth"
+import Jupiter from "../planetPages/Jupiter"
+import Mars from "../planetPages/Mars"
+import Mercury from "../planetPages/Mercury"
+import Neptune from "../planetPages/Neptune"
+import Saturn from "../planetPages/Saturn"
+import Uranus from "../planetPages/Uranus"
+import Venus from "../planetPages/Venus"
+
 const planetNavigator = createStackNavigator(
     {
         loginScreen:MyloginPage,
         solarSystem:solarSystemScreen,
         mainScreen:MainScreen,
-        planetInfo:PlanetInfo,
         profile:Profile,
         comment:CommentList,
-        quiz:Quiz
+        quiz:Quiz,
+        Earth:Earth,
+        Jupiter:Jupiter,
+        Mars:Mars,
+        Mercury:Mercury,
+        Neptune:Neptune,
+        Saturn:Saturn,
+        Uranus:Uranus,
+        Venus:Venus,
+        
     },
     {
         defaultNavigationOptions: {
-            headerShown: false
+            headerShown: false,
+            gestureEnabled: false,
         },
       }
 

@@ -14,6 +14,7 @@ import {
     Grayscale,
   } from 'react-native-color-matrix-image-filters'
 import { spring } from 'react-native-reanimated';
+import { setCurrent } from '../store/actions/storetemp'
 
 const data = [1, 2, 3, 4, 5, 6, 7, 8]
 const dataEarth = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune']
@@ -34,6 +35,7 @@ const solarSystemScreen = (props) => {
     const [indexmain, setindexmain] = useState(props.navigation.getParam("currentPos"))
     const [planetLimit, setPlanetLimit] = useState((3 * currentShip) +2)
     const [cantTravel, setCantTravel] = useState(false)
+    const dispatch = useDispatch();
 
     console.log(props.navigation.getParam("currentPos"))
 
@@ -142,6 +144,7 @@ const solarSystemScreen = (props) => {
                 onPress={() => {
                     if (indexmain <= planetLimit){
                     props.navigation.navigate("mainScreen",{current: indexmain})
+                    dispatch(setCurrent(indexmain));
                     }
                     else{
                         setCantTravel(true)

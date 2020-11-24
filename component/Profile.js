@@ -170,6 +170,11 @@ const Profile = (props) => {
           style={styles.backbutton}>
           <Ionicons name="ios-arrow-back" size={40} color="white" />
         </TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => props.navigation.navigate("loginScreen")}
+          style={styles.logoutbutton}>
+          <Text style={{color: 'white'}}>Log out</Text>
+        </TouchableOpacity>
         <Animatable.View style={styles.Bgprofile} animation="fadeInDown" delay={0}>
           <TouchableOpacity onPress={() => {setmodalchange(true)}}>
           <Image
@@ -573,5 +578,19 @@ boxach:{
   padding: 7,
   borderRadius: 7,
   flexDirection: 'row'
+},
+logoutbutton:{
+    height: 40,
+    padding: 5,
+    paddingHorizontal: 7,
+    position: 'absolute',
+    top: windowHeight * 0.09,
+    right: windowWidth * 0.04,
+    zIndex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#1f4068',
+    borderRadius: 5,
+    borderWidth:5,
+    borderColor: '#ff414d'
 }
 });

@@ -11,6 +11,7 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useSelector, useDispatch } from "react-redux";
 import { profilePic } from "../dataSystem/data"
 import { useIsFocused } from "@react-navigation/native";
+import { withNavigation } from 'react-navigation';
 
 
 
@@ -18,21 +19,21 @@ import { useIsFocused } from "@react-navigation/native";
 const UserInfo = (props) =>{
     const [exp, setExp] = useState(0.7);
     const [user, setUser] = useState({});
-    const [userload, setUserload] = useState(false)
-    const userTemp = useSelector( (state) => state.user );
+    //const [userload, setUserload] = useState(false)
 
     //const isFocused = useIsFocused();
+    /*
     useEffect(() =>{
-        console.log('userInfo RENDER!!!!')
+        //const userTemp = useSelector( (state) => state.user );
         setUser(userTemp)
         setUserload(true)
-    })
+    }, [userTemp])*/
     /*
     useEffect(() =>{
         console.log('userInfo FOCUS!!!!!')
     }, [isFocused])
     */
-    console.log(user)
+    console.log(props.userPic)
     return(
         <View style={styles.infoBox}>
             <View style={{width: 200}}>
@@ -43,7 +44,7 @@ const UserInfo = (props) =>{
             <View style={{flexDirection: 'row'}}>
                 <Image
                 style={styles.profilePic}
-                source={userload ? profilePic[userTemp.Profile].pic : ''} //รอแก้จาก UserDB
+                source={profilePic[props.userPic].pic} //รอแก้จาก UserDB
             />
               <Text style={styles.profileName_text}>{user.fname}</Text></View>
             </TouchableOpacity>
@@ -85,7 +86,7 @@ const UserInfo = (props) =>{
         </View>
     );
   }
-export default UserInfo;
+export default withNavigation(UserInfo);
 
 const styles = StyleSheet.create({
     Gopro:{

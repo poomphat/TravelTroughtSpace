@@ -12,16 +12,19 @@ import FireBaseInit from "./firebase/FirebaseInit";
 import { Provider } from 'react-redux'
 import { createStore, combineReducers } from "redux";
 import firebaseReducer from "./store/reducers/firebaseReducer"
-
+import Neptune from './planetPages/Neptune';
 
 FireBaseInit();
 const store = createStore(firebaseReducer);
 
 export default function App() {
   return (
+    
     <Provider store={store}>
       <PlanetNavigator/>
     </Provider>
+    
+    //<Neptune/>
   );
 }
 const styles = StyleSheet.create({

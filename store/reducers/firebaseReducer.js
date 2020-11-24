@@ -1,6 +1,6 @@
 
 import * as firebase from 'firebase';
-import {LOGIN, UPDATE_SCORE, CHANGE_SHIP,CHANGE_PIC} from "../actions/storetemp"
+import {LOGIN, UPDATE_SCORE, CHANGE_SHIP,CHANGE_PIC, SET_CURRENT} from "../actions/storetemp"
 import { useState } from 'react';
 const initialState = {
     user:{},
@@ -92,6 +92,21 @@ const initialState = {
             case CHANGE_PIC:
                 var user = state.user
                 user['Profile'] = action.picIndex
+
+                //FIND KEY
+                ref.orderByChild('email').on("child_added", function(Data){
+                    if(Data.val().email == user.email){
+                        console.log(Data.key)
+                        key = Data.key
+                    }
+                })
+
+                console.log(user)
+                firebase.database().ref('UsersList/' + key).set(user)
+                return {...state, user : user}
+            case SET_CURRENT:
+                var user = state.user
+                user['current'] = action.current
 
                 //FIND KEY
                 ref.orderByChild('email').on("child_added", function(Data){

@@ -1,6 +1,6 @@
 import React, { Component, useState, useRef, useEffect } from "react";
 import { Pages } from "react-native-pages";
-import {datasystem} from '../dataSystem/data'
+import {datasystem, spaceShip} from '../dataSystem/data'
 import {
   StyleSheet,
   Text,
@@ -12,6 +12,7 @@ import {
   Animated,
   Easing,
 } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
 
 const tempplanetdata = {
   earth: {
@@ -31,7 +32,9 @@ const tempplanetdata = {
 };
 
 const CurrentPlanet = (props) => {
+  //const currentShip = useSelector( (state) => state.user.CurrentShip );
   const moveplanet = useRef(new Animated.Value(0)).current;
+  console.log(spaceShip[props.spaceShipCurrent])
   const rotate = moveplanet.interpolate({
     inputRange: [0, 1],
     outputRange: ["0deg", "360deg"],
@@ -55,14 +58,15 @@ const CurrentPlanet = (props) => {
         onPress={props.planetclicked}
       >
         <Animated.Image
-          style={{ transform: [{ rotate: rotate }],width: 600,height: 600}}
+          style={[{ transform: [{ rotate: rotate }]},datasystem[props.planetcurrent].title != 'Saturn' ? {width: 600,height: 600} : {width: 660,height: 600}]}
           source={datasystem[props.planetcurrent].picture} //รอทำ data ดาว
         />
       </TouchableOpacity>
       <Image
         style={styles.spaceShip}
-        source={require("../assets/spaceship/ship1.png")} //รอทำ data ยาน
+        source={spaceShip[props.spaceShipCurrent].pic} //รอทำ data ยาน
       />
+      {datasystem[props.planetcurrent].title == 'Earth' ?
       <TouchableOpacity
         style={styles.touchSubPlanet}
       >
@@ -70,7 +74,7 @@ const CurrentPlanet = (props) => {
           style={styles.subPlanet}
           source={require("../assets/planet/moon.png")} //รอทำ data ดาว
         />
-      </TouchableOpacity>
+      </TouchableOpacity> : (<View></View>)}
     </View>
   );
 };
