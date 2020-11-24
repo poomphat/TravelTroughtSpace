@@ -422,6 +422,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: "center",
         height: Dimensions.get('window').height,
+        backgroundColor: '#1f4068',
     },
     loginBox: {
         width: Dimensions.get('window').width - 70,

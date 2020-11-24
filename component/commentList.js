@@ -92,6 +92,7 @@ const commentList = (props) => {
     };
     if(loaded){
     return (
+        <View style={{backgroundColor: '#1f4068'}}>
         <ImageBackground source={{uri:bg}} style={styles.commentlist} resizeMode="repeat">
             <TouchableOpacity 
               onPress={() => props.navigation.goBack()}
@@ -135,9 +136,11 @@ const commentList = (props) => {
                 </View>
             </KeyboardAvoidingView>
         </ImageBackground>
+        </View>
     );}
     else{
         return(
+            <View style={{backgroundColor: '#1f4068'}}>
             <ImageBackground source={{uri:bg}} style={styles.commentlist} resizeMode="repeat">
             <KeyboardAvoidingView
                 style={styles.commentlist}
@@ -170,6 +173,7 @@ const commentList = (props) => {
                 </View>
             </KeyboardAvoidingView>
         </ImageBackground>
+        </View>
         )
     }
 }

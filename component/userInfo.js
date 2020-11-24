@@ -21,17 +21,17 @@ const UserInfo = (props) =>{
     const [userload, setUserload] = useState(false)
     const userTemp = useSelector( (state) => state.user );
 
-    const isFocused = useIsFocused();
+    //const isFocused = useIsFocused();
     useEffect(() =>{
         console.log('userInfo RENDER!!!!')
         setUser(userTemp)
         setUserload(true)
     })
-
+    /*
     useEffect(() =>{
         console.log('userInfo FOCUS!!!!!')
     }, [isFocused])
-  
+    */
     console.log(user)
     return(
         <View style={styles.infoBox}>

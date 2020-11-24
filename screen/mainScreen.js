@@ -25,6 +25,7 @@ const MainScreen = (props) => {
         props.navigation.navigate("solarSystem", {currentPos:current})
     }
     return(
+        <View style={{backgroundColor: '#1f4068'}}>
         <ImageBackground source={{uri:bg}} style={styles.container} resizeMode="repeat">
             <Text style={{display: 'none'}}>{p}</Text>
                     <View>
@@ -82,6 +83,7 @@ const MainScreen = (props) => {
 
                     </View>
             </ImageBackground>
+            </View>
         );
                               
 }

@@ -8,10 +8,12 @@ import {datasystem} from '../dataSystem/data'
 import { useSelector, useDispatch } from "react-redux";
 import { Ionicons } from '@expo/vector-icons';
 import AwesomeAlert from 'react-native-awesome-alerts';
+import * as Animatable from 'react-native-animatable';
 //https://www.npmjs.com/package/react-native-image-filter
 import {
     Grayscale,
   } from 'react-native-color-matrix-image-filters'
+import { spring } from 'react-native-reanimated';
 
 const data = [1, 2, 3, 4, 5, 6, 7, 8]
 const dataEarth = ['Mercury', 'Venus', 'Earth', 'Mars', 'Jupiter', 'Saturn', 'Uranus', 'Neptune']
@@ -101,21 +103,24 @@ const solarSystemScreen = (props) => {
     return (
         <View style={{flex: 1,
             alignItems: 'center',
-            justifyContent: "center",}}>
+            justifyContent: "center",backgroundColor: '#1f4068'}}>
             {backbutton}
-        <Animated.Image source={{uri : bg}} style={{ 
+        <ImageBackground source={{uri : bg}} style={{ 
             position: 'absolute',
-            width:Dimensions.get('window').width,
-            height:Dimensions.get('window').height,
-            transform: [{translateX: 0 }]}} resizeMode="cover">
+            width: '100%',
+            height: '100%',}} resizeMode="repeat">
         
-        </Animated.Image>
+        </ImageBackground>
             <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', }}>
             <TouchableOpacity 
               onPress={() => props.navigation.goBack()}
               style={styles.backbutton}>
               <Ionicons name="ios-arrow-back" size={40} color="white"/>
             </TouchableOpacity>
+            <Animatable.Text animation="zoomIn" delay={70} duration={500}
+            style={{position: 'absolute', color: 'white', fontWeight: 'bold',fontSize:36,top: Dimensions.get('window').height*0.08,alignSelf:'center'}}>
+                <Text style={{color:'rgb(0,142,255)'}}>Solar</Text> System
+            </Animatable.Text>
                 <Carousel
                     ref={carouselRef}
                     data={data}
@@ -123,13 +128,16 @@ const solarSystemScreen = (props) => {
                     renderItem={renderItem}
                     firstItem={props.navigation.getParam("currentPos")}
                     scrollToIndex={props.navigation.getParam("currentPos")}
+                    inactiveSlideScale={0.5}
                     sliderWidth={Dimensions.get('window').width}
                     itemWidth={Dimensions.get('window').width}
                     onSnapToItem={(index) => setindexmain(index)}
                 />
             </View>
-            <View style={styles.boxdetail}>
-                <Text style={{ fontSize: 36 }}>{datasystem[indexmain].title}</Text>
+            <Animatable.View style={styles.boxdetail} animation="zoomIn" delay={70} duration={500}>
+                <Text style={{ fontSize: 36,color:'black',fontWeight: 'bold' }}>{datasystem[indexmain].title}</Text>
+                <Text style={{ fontSize: 20,color:'black',fontWeight: 'bold',marginTop:5 }}>ดวงดาวลำดับที่  {indexmain+1} ของระบบสุริยะ</Text>
+                <Text style={{ fontSize: 20,color:'black',fontWeight: 'bold',marginTop:5 }}></Text>
                 <TouchableOpacity style={styles.gotravelbutton}
                 onPress={() => {
                     if (indexmain <= planetLimit){
@@ -141,7 +149,7 @@ const solarSystemScreen = (props) => {
                 }}>
                 <Text style={{color:'white', fontSize:20,fontWeight: 'bold'}}>Travel!!</Text>
                 </TouchableOpacity>
-            </View>
+            </Animatable.View>
 
             <AwesomeAlert
                         show={cantTravel}
@@ -168,27 +176,30 @@ const styles = StyleSheet.create({
         position: 'absolute',
     },
     star: {
-        width: '90%',
-        height: '80%',
+        width: 300,
+        height: 300,
     },
     boxdetail: {
         width: Dimensions.get('window').width * 0.9,
-        height: 250,
-        backgroundColor: '#1f4068',
+        height: 200,
+        backgroundColor: '#9ba4b4',
         borderRadius: 20,
         marginBottom: 20,
-        justifyContent: 'center',
-        alignItems: 'center',
+        padding: 20,
+        borderColor: 'black',
+        borderWidth: 5
 
     },
     gotravelbutton:{
-        marginTop: 20,
-        backgroundColor: 'rgb(48,209,88)',
+        marginTop: 5,
+        backgroundColor: '#1f4068',
         width: Dimensions.get('window').width*0.8,
         height: 60,
+        borderWidth: 5,
+        borderColor: 'rgb(0,142,255)',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 7,
+        borderRadius: 15,
     },
     backbutton:{
         width: 60,
