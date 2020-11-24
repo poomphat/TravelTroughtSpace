@@ -80,15 +80,14 @@ const commentList = (props) => {
 
     const renderItem = ({ item, index }) => {
         return (
-            <View style={styles.box} key={item.Author}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                    <Image
-                        style={styles.profilePic}
-                        source={require("../assets/mheeIconTest.png")} //รอแก้จาก UserDB
-                    />
-                    <Text style={styles.textTitle}>{item.Author}</Text>
+            <View style={[styles.box,{backgroundColor: '#9ba4b4'}]} key={item.Author}>
+                <View style={{ flexDirection: 'row', alignItems: 'center',marginBottom: 5, }}>
+                    <Text style={styles.textTitle}>{item.Author} :</Text>
                 </View>
-                <Text style={styles.Detail}>{item.Detail}</Text>
+
+                <View style={{backgroundColor: '#29435c',paddingVertical:15 ,padding:5,width : Dimensions.get('window').width * 0.8,alignSelf: 'center',borderRadius:10,}}>
+                <Text style={styles.Detail}> {item.Detail}</Text>
+                </View>
             </View>);
     };
     if(loaded){
@@ -177,12 +176,20 @@ const commentList = (props) => {
 const styles = StyleSheet.create({
     box: {
         paddingVertical: 15,
-        paddingHorizontal:30,
-        width: Dimensions.get('window').width * 0.9,
-        backgroundColor: 'grey',
-        marginVertical: Dimensions.get('window').height * 0.01,
-        backgroundColor: '#1f4068',
-        borderRadius: 20,
+        paddingHorizontal: 30,
+        width: Dimensions.get('window').width*0.9,
+        marginVertical: 10,
+        borderRadius: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.25,
+        shadowRadius: 3.84,
+
+        elevation: 5,
+        borderWidth: 5
     },
     commentall: {
         height: Dimensions.get('window').height * 0.85,
@@ -192,9 +199,8 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     textTitle: {
-        marginLeft: 10,
-        color: 'white',
-        fontSize: 20,
+        color: 'black',
+        fontSize: 14,
         fontWeight: 'bold',
         justifyContent: 'center'
     },
@@ -206,11 +212,11 @@ const styles = StyleSheet.create({
         borderWidth: 2,
     },
     Detail: {
-        marginTop: 15,
         color: 'white',
-        fontSize: 14,
+        fontSize: 18,
         fontWeight: 'bold',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        marginLeft: 10,
     },
     Title: {
         marginTop: Dimensions.get('window').height * 0.06,

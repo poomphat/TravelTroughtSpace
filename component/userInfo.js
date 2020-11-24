@@ -10,13 +10,27 @@ import Constants from 'expo-constants';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useSelector, useDispatch } from "react-redux";
 import { profilePic } from "../dataSystem/data"
+import { useIsFocused } from "@react-navigation/native";
 
 
 
 
 const UserInfo = (props) =>{
     const [exp, setExp] = useState(0.7);
-    const user = useSelector( (state) => state.user );
+    const [user, setUser] = useState({});
+    const [userload, setUserload] = useState(false)
+    const userTemp = useSelector( (state) => state.user );
+
+    const isFocused = useIsFocused();
+    useEffect(() =>{
+        console.log('userInfo RENDER!!!!')
+        setUser(userTemp)
+        setUserload(true)
+    })
+
+    useEffect(() =>{
+        console.log('userInfo FOCUS!!!!!')
+    }, [isFocused])
   
     console.log(user)
     return(
@@ -29,7 +43,7 @@ const UserInfo = (props) =>{
             <View style={{flexDirection: 'row'}}>
                 <Image
                 style={styles.profilePic}
-                source={profilePic[user.Profile].pic} //รอแก้จาก UserDB
+                source={userload ? profilePic[userTemp.Profile].pic : ''} //รอแก้จาก UserDB
             />
               <Text style={styles.profileName_text}>{user.fname}</Text></View>
             </TouchableOpacity>

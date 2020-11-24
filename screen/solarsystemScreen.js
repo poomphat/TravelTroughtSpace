@@ -168,8 +168,8 @@ const styles = StyleSheet.create({
         position: 'absolute',
     },
     star: {
-        width: 300,
-        height: 300,
+        width: '90%',
+        height: '80%',
     },
     boxdetail: {
         width: Dimensions.get('window').width * 0.9,
