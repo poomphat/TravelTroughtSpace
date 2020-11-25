@@ -22,10 +22,15 @@ const UserInfo = (props) =>{
     const [progressArch, setProgressArch] = useState(0.0)
     const [fcount, setfCount] = useState(0)
     //const [userload, setUserload] = useState(false)
+    const userTemp = useSelector( (state) => state.user );
+    
 
     //const isFocused = useIsFocused();
-    const userTemp = useSelector( (state) => state.user );
+    
     useEffect(() =>{
+        console.log("aaaaaaaaaaaaaaa")
+        console.log(userTemp)
+        console.log("aaaaaaaaaaaaaaa")
         setUser(userTemp)
 
         var count = 0
@@ -39,14 +44,15 @@ const UserInfo = (props) =>{
         const progress = parseFloat(count) / parseFloat(Object.keys(userTemp['gotAchievement']).length)
         setfCount(fcount)
         setProgressArch(progress)
+        //console.log(progress+ 'pipipipaspcnasodvnhsbdvikbdsvdb')
         //setUserload(true)
-    }, [])
+    },[userTemp])
     /*
     useEffect(() =>{
         console.log('userInfo FOCUS!!!!!')
     }, [isFocused])
     */
-    console.log(props.userPic)
+    //console.log(props.userPic)
     return(
         <View style={styles.infoBox}>
             <View style={{width: 200}}>

@@ -36,7 +36,7 @@ const Quiz = (props) => {
                 onPress={() => props.navigation.goBack()}
                 style={styles.backbutton}>
                 <Ionicons name="ios-arrow-back" size={40} color="white" />
-                <Text style={{ color: 'white' }}>{quiznaja[props.navigation.getParam("planet")].title}</Text>
+                <Text style={{ color: 'white' ,marginLeft: 10, }}>{quiznaja[props.navigation.getParam("planet")].title}</Text>
             </TouchableOpacity>
         );
     }
@@ -74,12 +74,15 @@ const Quiz = (props) => {
             //const index = state.favoriteMeals.findIndex(el => (el.id === action.mealId))
         })
         const planetName = datasystem[props.navigation.getParam("planet")].title
-        dispatch(updateScore(planetName))
+        
         setscore(tempScore)
         setalertans(true)
+        if(tempScore == countquest)
+            dispatch(updateScore(planetName))
         setTimeout(() => {
             setcountDown(3)
         }, 1000);
+
         setTimeout(() => {
             setcountDown(2)
         }, 2000);
@@ -233,7 +236,7 @@ const styles = StyleSheet.create({
         height: Dimensions.get('window').height,
     },
     backbutton: {
-        width: 60,
+        width: 70,
         height: 60,
         zIndex: 1,
         flexDirection: 'row',

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Platform, StyleSheet, Text, View, Animated, Dimensions, TextInput, Button,Easing,KeyboardAvoidingView, Image } from 'react-native';
+import { Platform, StyleSheet, Text, View, Animated, Dimensions, TextInput, Button,Easing,KeyboardAvoidingView, Image, Keyboard } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import * as firebase from 'firebase';
 import FirebastInit from "../firebase/FirebaseInit"
@@ -63,18 +63,18 @@ const MyloginPage = (props) => {
 
     const onpressLogin = (text) => {
         setLoginState(text)
-        console.log(firebase.auth().currentUser);
+        //console.log(firebase.auth().currentUser);
         
     }
     const logout = () => {
         firebase.auth().signOut()
-        console.log(firebase.auth().currentUser);
+        //console.log(firebase.auth().currentUser);
         
     }
     const signUpUser = (email, password,fname,lname) => {
         //try {
             firebase.auth().createUserWithEmailAndPassword(email, password).then(data => {  
-                console.log("User ID :- ", data.user.uid);
+                //console.log("User ID :- ", data.user.uid);
                 setId(data.user.uid);
                 firebase.database().ref('UsersList/').push({
                     email,
@@ -94,6 +94,7 @@ const MyloginPage = (props) => {
                         "Venus" : false
                       },
                     current:2,
+                    CurrentShip:0,
                 })
                setalertregissuccess(true)
                 setTimeout(() => {
@@ -117,7 +118,8 @@ const MyloginPage = (props) => {
         //try {
             firebase.auth().signInWithEmailAndPassword(email, password).then(function (user) {
                 setalertsuccess(true)
-                console.log(user.user.email)
+                Keyboard.dismiss()
+                //console.log(user.user.email)
                 var userObj = {}
                 const ref = firebase.database().ref('UsersList')
                 ref.orderByChild('email').on("child_added", function(Data){
@@ -127,11 +129,11 @@ const MyloginPage = (props) => {
                     }
                 })
                 setTimeout(() => {
-                    console.log('Waitng')
+                    //console.log('Waitng')
                     props.navigation.navigate('mainScreen', {current:userObj.current})
                     setalertsuccess(false)
                   }, 1500);
-                console.log('finishlogin')
+                //console.log('finishlogin')
             
             }).catch(error => {
                 console.log('error ' , error)
@@ -214,7 +216,7 @@ const MyloginPage = (props) => {
                 <Text style={styles.Textalert}>Register success!!</Text>
                 <Text style={styles.Textalertmini}>Go to login and travel trought Universe.</Text>
             </View>
-            <TouchableOpacity style={styles.failedlbutton}
+            <TouchableOpacity style={styles.gotravelbutton}
             onPress={() => {
                 setalertregissuccess(false)
             }}>
@@ -334,7 +336,6 @@ const MyloginPage = (props) => {
                         color='white'
                         fontWeight='bold'
                         style={styles.TextBox}
-                        color
                         autoCapitalize="none"
                         onChangeText={(sur) => setsurname(sur)}
                     />

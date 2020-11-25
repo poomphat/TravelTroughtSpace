@@ -22,8 +22,15 @@ const MainScreen = (props) => {
     const userTemp = useSelector( (state) => state.user );
     useEffect(() => {
         setcurrent(props.navigation.getParam("current"))
-        
+
     })
+    useEffect(() => {
+        setp(p+1)
+    },[])
+
+    useEffect(() => {
+        console.log(userTemp.current + "currwnt")
+    }, [currentShip, userTemp])
     const gotoSolar = (current) =>{
         props.navigation.navigate("solarSystem", {currentPos:current})
     }
@@ -36,6 +43,7 @@ const MainScreen = (props) => {
                             gotoprofile={() => { props.navigation.navigate("profile") }}
                             gotoSolar={() => gotoSolar(current)}
                             userPic={userTemp.Profile}
+                            userA={userTemp}
                              />
                         <CurrentPlanet
                             planetclicked={() => {

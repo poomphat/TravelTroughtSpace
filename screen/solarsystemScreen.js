@@ -44,6 +44,7 @@ const solarSystemScreen = (props) => {
             return (
                 <View style={styles.box}>
                     <Image
+                        
                         style={styles.star}
                         source={datasystem[index].picture}
                         resizeMode="cover"
@@ -91,7 +92,7 @@ const solarSystemScreen = (props) => {
         return(
             <View style={{alignItems: 'center'}}>
                 <View style={{alignItems: 'center', marginTop: 20}}>
-                    <Text style={styles.Textalert}>You can't travel is planet right now</Text>
+                    <Text style={styles.Textalert}>You can't travel This planet right now</Text>
                     <Text style={styles.Textalertmini}>Try avalible planet</Text>
                 </View>
                 <TouchableOpacity style={styles.failedlbutton}

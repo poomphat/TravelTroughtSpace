@@ -54,58 +54,58 @@ const initialState = {
                 */
                 return {...state, user : action.user}
             case UPDATE_SCORE:
-                var user = state.user
+                var user = {...state.user}
                 var key = ""
                 //const plan = action.planet
-                console.log(user.gotAchievement[action.planetName])
+                //console.log(user.gotAchievement[action.planetName])
                 user['gotAchievement'][action.planetName] = true
                 //console.log('AFTER: '+user.gotAchievement[action.planetName])
 
                 //FIND KEY
                 ref.orderByChild('email').on("child_added", function(Data){
                     if(Data.val().email == user.email){
-                        console.log(Data.key)
+                        //console.log(Data.key)
                         key = Data.key
                     }
                 })
 
                 //const key = checkUserKey(user.email)
-                console.log(user)
+                //console.log(user)
                 checkShip(user, key)
                 firebase.database().ref('UsersList/' + key).set(user)
                 return {...state, user : user}
             case CHANGE_SHIP:
-                var user = state.user
+                var user = {...state.user}
                 user['CurrentShip'] = action.shipIndex
 
                 //FIND KEY
                 ref.orderByChild('email').on("child_added", function(Data){
                     if(Data.val().email == user.email){
-                        console.log(Data.key)
+                        //console.log(Data.key)
                         key = Data.key
                     }
                 })
 
-                console.log(user)
+                //console.log(user)
                 firebase.database().ref('UsersList/' + key).set(user)
                 return {...state, user : user}
             case CHANGE_PIC:
-                var user = state.user
+                var user = {...state.user}
                 user['Profile'] = action.picIndex
 
                 //FIND KEY
                 ref.orderByChild('email').on("child_added", function(Data){
                     if(Data.val().email == user.email){
-                        console.log(Data.key)
+                        //console.log(Data.key)
                         key = Data.key
                     }
                 })
 
-                console.log(user)
+                //console.log(user)
                 firebase.database().ref('UsersList/' + key).set(user)
                 return {...state, user : user}
             case SET_CURRENT:
-                var user = state.user
+                var user = {...state.user}
                 user['current'] = action.current
 
                 //FIND KEY

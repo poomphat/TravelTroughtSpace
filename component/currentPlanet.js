@@ -104,8 +104,8 @@ const styles = StyleSheet.create({
   },
   spaceShip: {
     position: "absolute",
-    width: windowWidth * 0.2,
-    height: windowHeight * 0.085,
+    width: 100,
+    height: 85,
     top: windowHeight * 0.3,
     left: windowWidth * 0.1,
   },

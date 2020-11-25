@@ -22,6 +22,7 @@ const data = [{
 }]
 
 const Profile = (props) => {
+  const currentShip = useSelector((state) => state.user.CurrentShip);
   const [modalVisible, setModalVisible] = useState(false);
   const [modalchange ,setmodalchange] = useState(false);
   const [dataach, setdataach] = useState(currentShip)
@@ -39,7 +40,7 @@ const Profile = (props) => {
 
 
   const bg = useSelector( (state) => state.img.background );
-  const currentShip = useSelector((state) => state.user.CurrentShip);
+  
 
   
   useEffect(() => {
@@ -56,7 +57,6 @@ const Profile = (props) => {
     //console.log(count + ' Count')
     //console.log(parseFloat(Object.keys(user['gotAchievement']).length) + " all")
     const progress = parseFloat(count) / parseFloat(Object.keys(user['gotAchievement']).length)
-    //console.log(progress)
     setfCount(fcount)
     setProgressArch(progress)
     //console.log("setProgressArch " +progressArch)
@@ -90,6 +90,7 @@ const Profile = (props) => {
 
   const changeship = () => {
     //console.log(user['gotAchievement'].length)
+    console.log(indexmain + 'ssssssssssssssssssss')
     if (indexmain == 2) {
       if (user['shipList'][2]) {
         dispatch(changeShip(indexmain))
@@ -124,7 +125,7 @@ const Profile = (props) => {
         />
         <View style={{ alignItems: 'center', marginTop: 20 }}>
           <Text style={styles.Textalert}>Can't Change ship</Text>
-          <Text style={styles.Textalertmini}>You need to pass 3 quiz</Text>
+          <Text style={styles.Textalertmini}>You need to do more quiz boiz</Text>
         </View>
         <TouchableOpacity style={styles.failedlbutton}
           onPress={() => {
@@ -212,10 +213,11 @@ const Profile = (props) => {
                   renderItem={renderItem}
                   sliderWidth={Dimensions.get('window').width * 0.9}
                   itemWidth={Dimensions.get('window').width * 0.30}
-                  activeSlideAlignment={'start'}
+                  activeSlideAlignment={'center'}
                   loop={true}
                   firstItem={currentShip}
                   loopClonesPerSide={5}
+                  useScrollView={true}
                   inactiveSlideScale={0.5}
                   onSnapToItem={(index) => { setindexmain(index)}}
                 />
@@ -287,7 +289,7 @@ const Profile = (props) => {
                 {datasystem.map((item,index)=>{
 
                   return(
-                    <View key={index} style={[styles.boxach ,user['gotAchievement'][item.title] ? {backgroundColor: 'rgb(48,209,88)'}: {backgroundColor: '#ffffff22'}]}>
+                    <View key={index} style={[styles.boxach ,user['gotAchievement'][item.title] ? {backgroundColor: '#2aaf74'}: {backgroundColor: '#ffffff22'}]}>
                       <Image
                         style={{width: 100,height:100}}
                         source={item.picture} //รอแก้จาก UserDB
@@ -523,7 +525,7 @@ modalView2: {
   width: Dimensions.get('window').width * 0.9,
   height: Dimensions.get('window').height * 0.25,
   margin: 20,
-  backgroundColor: "rgb(48,209,88)",
+  backgroundColor: "#2aaf74",
   borderRadius: 20,
   padding: 20,
 
@@ -577,14 +579,16 @@ boxach:{
   marginHorizontal: 17,
   padding: 7,
   borderRadius: 7,
-  flexDirection: 'row'
+  flexDirection: 'row',
+  borderWidth: 3,
+  borderColor: 'white'
 },
 logoutbutton:{
     height: 40,
     padding: 5,
     paddingHorizontal: 7,
     position: 'absolute',
-    top: windowHeight * 0.09,
+    top: windowHeight * 0.082,
     right: windowWidth * 0.04,
     zIndex: 1,
     justifyContent: 'center',
