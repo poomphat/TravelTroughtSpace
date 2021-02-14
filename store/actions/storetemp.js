@@ -19,6 +19,6 @@ export const changeShip = (index) =>{
 export const changePic = (index) =>{
     return { type: CHANGE_PIC, picIndex: index}
 }
-export const setCurrent = ( ) =>{
+export const setCurrent = (current) =>{
     return { type: SET_CURRENT, current: current}
 }
