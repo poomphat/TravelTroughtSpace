@@ -5,7 +5,6 @@ import { StyleSheet, Text, View, Image, Platform, Button, Dimensions, ImageBackg
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { FontAwesome, AntDesign,Entypo } from '@expo/vector-icons';
 import * as Animatable from 'react-native-animatable';
-import LoadingScreen from "../component/LoadingScreen";
 import { Assets } from 'react-navigation-stack';
 import { useSelector, useDispatch } from "react-redux";
 import {datasystem, spaceShip} from '../dataSystem/data'

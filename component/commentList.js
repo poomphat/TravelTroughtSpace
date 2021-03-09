@@ -9,7 +9,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import * as Animatable from 'react-native-animatable';
 import * as firebase from 'firebase'
-import LoadingScreen from '../component/LoadingScreen';
 import { useSelector, useDispatch } from "react-redux";
 import {datasystem} from '../dataSystem/data'
 

@@ -12,7 +12,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import * as Animatable from 'react-native-animatable';
 import { Pages } from 'react-native-pages';
-import LoadingScreen from "../component/LoadingScreen";
 import LottieView from 'lottie-react-native';
 import AwesomeAlert from 'react-native-awesome-alerts';
 import { useSelector, useDispatch } from "react-redux";
