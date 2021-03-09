@@ -186,7 +186,7 @@ const Quiz = (props) => {
         )
     } else {
         return (
-            <LoadingScreen></LoadingScreen>
+            <View></View>
         )
     }
 
