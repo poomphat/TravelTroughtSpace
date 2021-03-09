@@ -1,5 +1,4 @@
 import React, { Component, useState, useRef, useEffect } from "react";
-import { Pages } from "react-native-pages";
 import {datasystem, spaceShip} from '../dataSystem/data'
 import {
   StyleSheet,
