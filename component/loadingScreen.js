@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, } from 'react-native';
 import LottieView from 'lottie-react-native';
-import * as Font from 'expo-font';
 import { useFonts } from 'expo-font';
 import ProgressBar from 'react-native-progress/Bar'
 
